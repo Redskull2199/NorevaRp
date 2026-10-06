@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="newui/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="hider">
+        <div class="mainMenu">
+            <div class="gradient"></div>
+            <div class="options">
+                <div class="optionLabel"><img src="newui/assets/mainOptions.png"></div>
+    
+                <div class="child">
+                    <div class="text">Yayaları Optimize Et</div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="pedsON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="pedsOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="peds"></div>
+                    </div>
+                </div>
+    
+                <div class="child">
+                    <div class="text">Araçları Optimize Et</div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="vehiclesON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="vehiclesOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="vehicles"></div>
+                    </div>
+                </div>
+    
+                <div class="child">
+                    <div class="text">Objeleri Optimize Et</div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="objectsON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="objectsOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="objects"></div>
+                    </div>
+                </div>
+                
+                <div class="child">
+                    <div class="text">Partikülleri Kaldır</div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="particlesON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="particlesOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="particles"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="options" id="center"> 
+                <div class="optionLabel"><img src="newui/assets/otherOptions.png"></div>
+    
+                <div class="child">
+                    <div class="text">Kırık Camları Devre Dışı Bırak</div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="brokenON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="brokenOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="broken"></div>
+                    </div>
+                </div>
+    
+                <div class="child">
+                    <div class="text">Yaya Kirini Temizle</div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="pedON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="pedOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="ped"></div>
+                    </div>
+                </div>
+    
+                <div class="child">
+                    <div class="text">Çeşitli Optimizasyonları Aç</div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="unnecessaryON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="unnecessaryOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="unnecessary"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="options" style="margin-right: 0;">
+                <div class="optionLabel"><img src="newui/assets/worldOptions.png"></div>
+    
+                <div class="child">
+                    <div class="text">Yağmur ve Rüzgarı Devre Dışı Bırak</div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="rainON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="rainOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="rain"></div>
+                    </div>
+                </div>
+                
+                <div class="child">
+                    <div class="text">Gölgeleri Optimize Et</div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="shadowsON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="shadowsOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="shadows"></div>
+                    </div>
+                </div>
+                
+                <div class="child">
+                    <div class="text">Işıkları Optimize Et</div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="lightsON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="lightsOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="lights"></div>
+                    </div>
+                </div> 
+    
+                <div class="child">
+                    <div class="text">Doku Kalitesini Düşür <small>(deneysel)</small></div>
+                    <div class="switch">
+                        <div class="flex">
+                            <div class="switchOption" id="lowTextureON">AÇIK</div>
+                            <div class="switchOption selectedOFF" id="lowTextureOFF">KAPALI</div>
+                        </div>
+                        <div class="switchIndicator" id="lowTexture"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="newui/script.js"></script>
+</html>

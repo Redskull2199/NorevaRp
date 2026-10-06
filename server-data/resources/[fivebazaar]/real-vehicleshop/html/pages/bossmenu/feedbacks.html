@@ -1,0 +1,73 @@
+<div class="w-full h-full flex items-start justify-between">
+    <div class="w-[34.3%] h-[98%] flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+        <div class="w-full h-[12%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+            <img src="./img/bossmenu/bg-effect.png" class="w-[12.5vw] h-full right-0 absolute">
+            <div class="w-[73%] h-full flex flex-col items-start justify-center left-[4%] top-0 absolute">
+                <span class="w-full text-[#C3C3C3] text-[.8333vw] font-semibold font-['Poppins'] mt-[.2vw]">{{ $root.Language['feedbacksandcomplaints'] }}</span>
+                <span class="w-full text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['feedbacksandcomplaints_description'] }}</span>
+            </div>
+        </div>
+        <div class="w-full h-[2%]"></div>
+        <div class="w-full h-[84%] flex items-center justify-center">
+            <div class="w-[97%] h-full block overflow-y-auto overflow-x-hidden">
+                <div v-for="(v, k) in $root.FeedbackAndComplaintsTable" class="w-[98.5%] h-[9%] bg-[#000000DE] rounded-[.17vw] flex flex-wrap mb-[.2vw]">
+                    <div class="w-[10%] h-full flex items-center justify-end">
+                        <div class="w-[78%] h-[85%] rounded-[50%] border-[.0521vw]" :class="{ 'border-[#00F0FF]': v.type == 'feedback', 'border-[#FF0004]': v.type == 'complaint' }">
+                            <img :src="v.pfp" class="w-full h-full">
+                        </div>
+                    </div>
+                    <div class="w-[2%]"></div>
+                    <div class="w-[50%] h-full flex flex-col items-center justify-center relative">
+                        <span class="w-full text-[.7292vw] font-medium font-['Poppins'] top-[.2vw] absolute" :class="{ 'text-cyan-400': v.type == 'feedback', 'text-[#FF0004]': v.type == 'complaint' }">{{ v.type == 'feedback' ? $root.Language['feedback'] : $root.Language['complaint'] }}</span>
+                        <span class="w-full text-neutral-400 text-[.5208vw] font-semibold font-['Poppins'] bottom-[.2vw] absolute">{{ v.name }}</span>
+                    </div>
+                    <div class="w-[5%] h-full"></div>
+                    <div class="w-[30.5%] h-full flex items-center justify-between">
+                        <div class="w-[48%] h-[55%] flex items-center justify-center bg-[#5D5D5D] rounded-[.17vw] cursor-pointer" @click="$root.RemoveFeedbackComplaint(k, v.name, v.message, v.type)">
+                            <div class="w-full text-white text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.Language['remove'] }}</div>
+                        </div>
+                        <div class="w-[48%] h-[55%] flex items-center justify-center bg-[#00F0FF] rounded-[.17vw] cursor-pointer" @click="$root.FeedbackComplaintScreen = k">
+                            <div class="w-full text-black text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.Language['read'] }}</div>
+                        </div>
+                    </div>
+                    <div class="w-[2.5%] h-full"></div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full h-[2%]"></div>
+    </div>
+    <div class="w-[65.3%] h-[50%] flex flex-col bg-[#000000BF] rounded-[.2604vw]" v-if="$root.FeedbackComplaintScreen >= 0">
+        <div class="w-full h-[24%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+            <img src="./img/bossmenu/feedback-complaint.png" class="w-[12.5vw] h-full right-0 absolute">
+            <div class="w-[73%] h-full flex flex-col items-start justify-center left-[1.5%] top-0 absolute">
+                <span class="w-full text-[.8333vw] font-semibold font-['Poppins'] mt-[.2vw]" :class="{ 'text-cyan-400': $root.FeedbackAndComplaintsTable[$root.FeedbackComplaintScreen].type == 'feedback', 'text-[#FF0004]': $root.FeedbackAndComplaintsTable[$root.FeedbackComplaintScreen].type == 'complaint' }">{{ $root.FeedbackAndComplaintsTable[$root.FeedbackComplaintScreen].type == 'feedback' ? $root.Language['feedback'] : $root.Language['complaint'] }}</span>
+            </div>
+        </div>
+        <div class="w-full h-[4.5%]"></div>
+        <div class="w-full h-[63%] flex items-center justify-center">
+            <div class="w-[96%] h-full flex flex-wrap bg-[#7B7B7B] rounded-[.2604vw]">
+                <div class="w-[21.8%] h-full rounded-[.2604vw]">
+                    <img :src="$root.FeedbackAndComplaintsTable[$root.FeedbackComplaintScreen].pfp" class="w-full h-full">
+                </div>
+                <div class="w-[2%] h-full"></div>
+                <div class="w-[66.5%] h-full flex flex-col">
+                    <div class="w-full h-[11.5%]"></div>
+                    <div class="w-full h-[10%] flex items-center justify-start">
+                        <span class="w-full text-white text-[.7292vw] font-semibold font-['Poppins']">{{ $root.FeedbackAndComplaintsTable[$root.FeedbackComplaintScreen].name }}</span>
+                    </div>
+                    <div class="w-full h-[6%]"></div>
+                    <div class="w-full h-[61%] block overflow-y-auto flex items-start justify-start">
+                        <span class="w-full text-white text-[.625vw] font-medium font-['Poppins']">{{ $root.FeedbackAndComplaintsTable[$root.FeedbackComplaintScreen].message }}</span>
+                    </div>
+                    <div class="w-full h-[11.5%]"></div>
+                </div>
+                <div class="w-[9.7%] h-full flex items-start">
+                    <div class="w-full h-[21%] flex flex-wrap items-end justify-between" v-if="$root.FeedbackAndComplaintsTable[$root.FeedbackComplaintScreen].type == 'feedback'">
+                        <inlinesvg class="w-[1.9vw] h-[1.9vw]" src="./img/svg/star.svg"></inlinesvg>
+                        <span class="w-[50%] text-white text-[.8854vw] font-semibold font-['Poppins'] mb-[.17vw]">{{ $root.FeedbackAndComplaintsTable[$root.FeedbackComplaintScreen].stars.toFixed(1) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

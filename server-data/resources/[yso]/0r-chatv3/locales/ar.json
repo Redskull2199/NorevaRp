@@ -1,0 +1,26 @@
+{
+    "Web": {
+        "type_a_message": "اكتب رسالة...",
+        "chat_settings": "إعدادات الدردشة",
+        "chat_settings_description": "تخصيص لوحة الدردشة",
+        "chat_theme": "سمة الدردشة",
+        "chat_theme_description": "تغيير سمة الدردشة إلى تصميم آخر",
+        "main_color": "اللون الرئيسي",
+        "main_color_description": "تغيير اللون الرئيسي للدردشة",
+        "position": "الموضع",
+        "position_description": "تغيير موضع الدردشة",
+        "size": "الحجم",
+        "size_description": "تغيير حجم الدردشة",
+        "small": "صغير",
+        "medium": "متوسط",
+        "large": "كبير",
+        "command_list": "قائمة الأوامر",
+        "save_changes": "حفظ التغييرات",
+        "close": "إغلاق",
+        "res_chat": "إعادة تعيين الدردشة",
+        "suggestion": "اقتراح",
+        "music": "الموسيقى",
+        "now_playing": "قيد التشغيل الآن"
+    },
+    "Lua": {}
+}

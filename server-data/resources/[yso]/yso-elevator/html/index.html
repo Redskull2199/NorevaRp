@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevator UI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+</head>
+<body>
+    <div id="app">
+        <div id="background-window">
+            <div class="elevator-ui">
+                <div class="display">
+                    <i id="direction-up" class="fas fa-caret-up arrow" 
+                       :style="{ color: directionUpActive ? 'white' : 'rgba(255, 255, 255, 0.3)' }"></i>
+                    <i id="direction-down" class="fas fa-caret-down arrow"
+                       :style="{ color: directionDownActive ? 'white' : 'rgba(255, 255, 255, 0.3)' }"></i>
+                    <div class="floor-background">
+                        <div id="current-floor">
+                            <span id="digit-1">{{ digit1 }}</span><span id="digit-2">{{ digit2 }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="floor-columns" id="floor-columns">
+                    <div class="floor-column">
+                        <button 
+                            v-for="(floor, index) in leftColumnFloors.slice().reverse()" 
+                            :key="'left-' + floor.number"
+                            class="floor-button"
+                            :class="{ 'active-floor': isActiveFloor(floors.indexOf(floor)) }"
+                            @click="handleFloorClick(floor, floors.indexOf(floor))">
+                            {{ floor.number }}
+                            <span v-if="floor.name" class="tooltip">{{ floor.name }}</span>
+                        </button>
+                    </div>
+                    <div class="floor-column">
+                        <button 
+                            v-for="(floor, index) in rightColumnFloors.slice().reverse()" 
+                            :key="'right-' + floor.number"
+                            class="floor-button"
+                            :class="{ 'active-floor': isActiveFloor(floors.indexOf(floor)) }"
+                            @click="handleFloorClick(floor, floors.indexOf(floor))">
+                            {{ floor.number }}
+                            <span v-if="floor.name" class="tooltip">{{ floor.name }}</span>
+                        </button>
+                    </div>
+                </div>
+                <button id="stop-button" class="stop-button" @click="stopElevator">STOP</button>
+            </div>
+        </div>
+
+        <div id="modal" class="modal" :class="{ show: showModal, hide: !showModal }" :style="{ display: showModal ? 'block' : 'none' }">
+            <div class="modal-content">
+                <span class="close-button" @click="closeModal"><i class="fas fa-times"></i></span>
+                <h2>Restricted Access</h2>
+                <label for="password-input">Enter access code:</label>
+                <input 
+                    type="password" 
+                    id="password-input" 
+                    v-model="passwordInput"
+                    @keyup.enter="submitPassword"
+                    placeholder="Enter access code">
+                <button id="submit-password" @click="submitPassword">Submit</button>
+                <div id="error-message" class="error-message" :class="{ shake: errorMessage }">
+                    {{ errorMessage }}
+                </div>
+            </div>
+        </div>
+
+        <audio id="button-sound" src="sounds/button.ogg"></audio>
+        <audio id="arrival-sound" src="sounds/arrival.ogg"></audio>
+        <audio id="ambient-sound" src="sounds/ambient.ogg" loop></audio>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.prod.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

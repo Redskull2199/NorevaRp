@@ -1,0 +1,28 @@
+Language = {
+    ["English"] = {
+        ["notvnearby"] = "Yakında televizyon yok",
+        ["notsupported"] = "Bu video formatı desteklenmiyor! (Config.EnableExternalSources)",
+		["noinvehicle"] = "Araçta değilsin",
+		["tvinstalled"] = "Araca televizyon kuruldu",
+		["vehiclenotowned"] = "Bu araç sana ait değil",
+		["notenoughitem"] = "Araç televizyon eşyasına sahip değilsin",
+		["nopermission"] = "Bu televizyonu açma iznin yok",
+		["streamerdeactivated"] = "Yayıncı modu devre dışı bırakıldı",
+		["streamerdactivated"] = "Yayıncı modu etkinleştirildi",		
+		["controltv"] = "Televizyonu kontrol et",	
+		["mediaplayer"] = "Medya Oynatıcı",
+    },
+	["German"] = {
+		["notvnearby"] = "Kein Fernseher in der Nähe",
+		["notsupported"] = "Das Videoformat wird nicht unterstützt! (Config.EnableExternalSources)",
+		["noinvehicle"] = "Du bist nicht im Fahrzeug",
+		["tvinstalled"] = "Du hast das Fernsehgerät in einem Fahrzeug eingebaut",
+		["vehiclenotowned"] = "Dieses Fahrzeug ist nicht dein Besitz!",
+		["notenoughitem"] = "Sie haben kein Fahrzeugfernsehen",
+		["nopermission"] = "Sie haben nicht die Erlaubnis, diesen Fernseher zu öffnen",
+		["streamerdeactivated"] = "Streamer mode deactivated",
+		["streamerdactivated"] = "Streamer mode activated",		
+		["controltv"] = "Control the TV",	
+		["mediaplayer"] = "Media Player",	
+	},	
+}

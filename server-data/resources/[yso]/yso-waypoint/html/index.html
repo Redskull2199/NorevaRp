@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waypoint UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="waypoint" data-shape="circle">
+        <div class="hud-wrapper">
+            <div class="pulse-ring"></div>
+            <div class="center-circle">
+                <i class="material-icons-round">near_me</i>
+            </div>
+        </div>
+        <div class="distance">0m</div>
+    </div>
+
+    <div id="settings-panel">
+        <div class="panel-header">
+            <h2 id="txt-title"></h2>
+            <button id="btn-close" class="close-button">
+                <i class="material-icons-round">close</i>
+            </button>
+        </div>
+        
+        <div class="setting-row">
+            <div class="label-group">
+                <span class="label-title" id="lbl-indicator"></span>
+                <span class="label-desc" id="desc-indicator"></span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="toggle-waypoint" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="setting-row">
+            <div class="label-group">
+                <span class="label-title" id="lbl-color"></span>
+                <span class="label-desc" id="desc-color"></span>
+            </div>
+            <div class="color-wrapper">
+                <div class="color-preview" id="color-preview-circle"></div>
+                <span class="color-code" id="color-code-text">#3B82F6</span>
+                <input type="color" id="color-picker" value="#3b82f6">
+            </div>
+        </div>
+
+        <div class="setting-row">
+            <div class="label-group">
+                <span class="label-title" id="lbl-shape"></span>
+                <span class="label-desc" id="desc-shape"></span>
+            </div>
+            <div class="custom-select">
+                <select id="shape-selector">
+                    <option value="circle" id="opt-circle"></option>
+                    <option value="rounded" id="opt-rounded"></option>
+                    <option value="square" id="opt-square"></option>
+                    <option value="diamond" id="opt-diamond"></option>
+                    <option value="rectangle" id="opt-rectangle"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="setting-row">
+            <div class="label-group">
+                <span class="label-title" id="lbl-unit"></span>
+                <span class="label-desc" id="desc-unit"></span>
+            </div>
+            <div class="custom-select">
+                <select id="unit-selector">
+                    <option value="metric" id="opt-metric"></option>
+                    <option value="imperial" id="opt-imperial"></option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn-save" id="btn-save"></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

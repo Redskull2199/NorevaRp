@@ -1,0 +1,26 @@
+{
+    "Web": {
+        "type_a_message": "输入消息...",
+        "chat_settings": "聊天设置",
+        "chat_settings_description": "自定义聊天面板",
+        "chat_theme": "聊天主题",
+        "chat_theme_description": "将聊天主题更改为其他设计",
+        "main_color": "主颜色",
+        "main_color_description": "更改聊天的主颜色",
+        "position": "位置",
+        "position_description": "更改聊天的位置",
+        "size": "大小",
+        "size_description": "更改聊天大小",
+        "small": "小",
+        "medium": "中",
+        "large": "大",
+        "command_list": "命令列表",
+        "save_changes": "保存更改",
+        "close": "关闭",
+        "res_chat": "重置聊天",
+        "suggestion": "建议",
+        "music": "音乐",
+        "now_playing": "正在播放"
+    },
+    "Lua": {}
+}

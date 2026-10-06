@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radial Menu Pizza Slices</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="radial-menu" class="hidden">
+        <div id="particles-container"></div>
+        
+
+        <div id="settings-btn" class="settings-btn">
+            <i class="fa-solid fa-gear"></i>
+        </div>
+
+
+        <div id="settings-panel" class="settings-panel hidden">
+            <div class="settings-header">
+                <h3><i class="fa-solid fa-sliders"></i> Settings</h3>
+                <div class="close-btn" id="close-settings-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-title">Particles</span>
+                        <span class="setting-desc">Enable background particles</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="toggle-particles" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-title">Primary Color</span>
+                        <span class="setting-desc">Base color of the slices</span>
+                    </div>
+                    <input type="color" id="menu-color" value="#1e1e1e">
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-title">Secondary Color</span>
+                        <span class="setting-desc">Glow & stroke color</span>
+                    </div>
+                    <input type="color" id="secondary-color" value="#ffffff">
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-title">Menu Opacity</span>
+                        <span class="setting-desc">Adjust transparency</span>
+                    </div>
+                    <input type="range" id="menu-opacity" min="0.4" max="1.0" step="0.05" value="0.85">
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-title">Menu Scale</span>
+                        <span class="setting-desc">Adjust menu size</span>
+                    </div>
+                    <input type="range" id="menu-scale" min="0.7" max="1.3" step="0.05" value="1.0">
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <span class="setting-title">Particle Color</span>
+                        <span class="setting-desc">Color of the falling particles</span>
+                    </div>
+                    <input type="color" id="particle-color" value="#000000">
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-container">
+            <svg id="menu-svg" width="500" height="500" viewBox="0 0 500 500"></svg>
+            <div id="menu-icons" class="menu-icons"></div>
+            
+            <div class="center-button" id="center-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<div class="w-full h-full flex items-center justify-between">
+    <div class="w-[34.3%] h-[98%] flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+        <div class="w-full h-[12%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+            <img src="./img/bossmenu/bg-effect.png" class="w-[12.5vw] h-full right-0 absolute">
+            <div class="w-[4.4792vw] h-[1.1458vw] flex items-center justify-center bg-[#00F0FF] rounded-[.17vw] right-[1vw] top-[1.2vw] absolute cursor-pointer" @click="$root.ShowBossPopup = 'createcategory'">
+                <span class="w-full text-black text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.Language['create'] }}</span>
+            </div>
+            <div class="w-[73%] h-full flex flex-col items-start justify-center left-[3%] top-0 absolute">
+                <span class="w-full text-[#C3C3C3] text-[.8333vw] font-semibold font-['Poppins'] mt-[.2vw]">{{ $root.Language['category'] }}</span>
+                <span class="w-full text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['category_description'] }}</span>
+            </div>
+        </div>
+        <div class="w-full h-[2%]"></div>
+        <div class="w-full h-[84%] flex items-center justify-center">
+            <div class="w-[97%] h-full block overflow-y-auto overflow-x-hidden">
+                <div v-for="(v, k) in $root.CategoryList" class="w-[98.5%] h-[9%] bg-[#000000DE] rounded-[.17vw] flex flex-wrap mb-[.15vw]">
+                    <div class="w-[2%] h-full"></div>
+                    <div class="w-[30%] h-full flex items-center justify-center">
+                        <span class="w-full text-white text-[.7292vw] font-medium font-['Poppins']">{{ v.label }}</span>
+                    </div>
+                    <div class="w-[5%] h-full"></div>
+                    <div class="w-[60.5%] h-full flex items-center justify-end">
+                        <div class="w-[32%] h-[55%] flex items-center justify-center bg-[#5D5D5D] rounded-[.17vw] cursor-pointer" @click="$root.SelectedShowCategory = k">
+                            <div class="w-full text-white text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.Language['show'] }}</div>
+                        </div>
+                        <div class="w-[32%] h-[55%] flex items-center justify-center bg-[#5D5D5D] rounded-[.17vw] cursor-pointer ml-[1.1%]" @click="$root.RemoveCategory(v.name)" v-if="v.name != 'all'">
+                            <div class="w-full text-white text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.Language['remove'] }}</div>
+                        </div>
+                        <div class="w-[32%] h-[55%] flex items-center justify-center bg-[#00F0FF] rounded-[.17vw] cursor-pointer ml-[1%]" @click="$root.ShowBossPopup = 'editcategory'; $root.Inputs.CategoryLabelInput = v.label; $root.SelectedEditCategoryName = v.name;" v-if="v.name != 'all'">
+                            <div class="w-full text-black text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.Language['edit'] }}</div>
+                        </div>
+                    </div>
+                    <div class="w-[2.5%] h-full"></div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full h-[2%]"></div>
+    </div>
+    <div class="w-[65.3%] h-[98%] flex flex-col bg-[#000000BF] rounded-[.2604vw]" v-if="$root.SelectedShowCategory >= 0">
+        <div class="w-full h-[12.3%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+            <img src="./img/bossmenu/second-car-bg.png" class="w-[14.5vw] h-[3.85vw] right-0 bottom-0 absolute">
+            <div class="w-[73%] h-full flex flex-col items-start justify-center left-[1.5%] top-0 absolute">
+                <span class="w-full text-[#C3C3C3] text-[.8333vw] font-semibold font-['Poppins'] mt-[.2vw]">{{ $root.CategoryList[$root.SelectedShowCategory].label }}</span>
+                <span class="w-full text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['show_category_vehicles'] }}</span>
+            </div>
+        </div>
+        <div class="w-full h-[2%]"></div>
+        <div class="w-full h-[86%] flex items-start justify-center">
+            <div class="w-[98%] h-[99%] block overflow-y-auto overflow-x-hidden">
+                <div v-for="(v, k) in $root.CategoryPageFilterVehicle($root.CategoryList[$root.SelectedShowCategory].name)" class="w-[24.4%] h-[39.3%] flex flex-col float-left mr-[.2vw] mb-[.3vw] hover:scale-[.98]" :class="[(k + 1) % 4 === 0 ? 'no-margin' : '']">
+                    <div class="w-full h-[79%] bg-[#000000DE] rounded-[.2604vw] relative">
+                        <img src="./img/bossmenu/vehicle-container-effect-gray.png" class="w-[14.5833vw] h-[9.1146vw] right-0 absolute">
+                        <div class="w-full h-full flex flex-wrap items-center left-0 top-0 absolute">
+                            <div class="w-[4%] h-full"></div>
+                            <div class="w-[80%] h-[86%] flex flex-col items-start justify-start relative">
+                                <span class="w-full text-white text-[.8333vw] font-semibold font-['Poppins'] left-0 top-0 absolute">{{ v.label }}</span>
+                                <span class="w-full text-neutral-400 text-[.6771vw] font-semibold font-['regular'] left-0 top-[1vw] absolute">{{ v.model }}</span>
+                            </div>
+                            <div class="w-[16%] h-full"></div>
+                        </div>
+                        <div class="w-[70%] h-full flex items-center justify-center right-0 top-0 absolute">
+                            <img :src="v.img" class="w-full h-auto">
+                        </div>
+                        <!-- <div class="w-[26%] h-[13%] flex items-center justify-center bg-[#00F0FF] rounded-[.1vw] left-[.45vw] bottom-[1vw] absolute cursor-pointer" @click="$root.OpenEditVehicleScreen(k, v.label, v.model, v.img, v.discount, v.price, v.category)">
+                            <span class="w-full text-black text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.Language['edit'] }}</span>
+                        </div> -->
+                    </div>
+                    <div class="w-full h-[2%]"></div>
+                    <div class="w-full h-[18%] flex items-center justify-between bg-[#000000DE] rounded-[.2604vw]">
+                        <span class="w-[49%] text-white text-[.7292vw] font-semibold font-['Poppins'] pl-[.5vw]">{{ $root.Language['stock'] + ': ' + v.stock }}</span>
+                        <span class="w-[49%] text-neutral-400 text-[.7292vw] text-right font-semibold font-['Poppins'] pr-[.5vw]">${{ $root.FormatMoney(v.price) }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

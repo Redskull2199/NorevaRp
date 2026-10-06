@@ -1,0 +1,167 @@
+<div class="w-full h-full flex flex-col">
+    <div class="w-full h-[91%] flex flex-wrap justify-between">
+        <div class="w-[49.5%] h-full flex flex-col">
+            <div class="w-full h-[27.5%] flex flex-col bg-[#000000BF] rounded-[.2604vw] mb-[.22vw]">
+                <div class="w-full h-[49%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-base font-semibold font-['Poppins'] top-[.775vw] absolute">{{ $root.Language['company_name'] }}</span>
+                        <div class="w-full bottom-[.55vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins'] mr-[.3vw]">{{ $root.Language['current_company_name'] }}:</span>
+                            <span class="text-cyan-400 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.VehicleShopName }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-full right-0 bottom-0 absolute">
+                </div>
+                <div class="w-full h-[51%] flex items-start justify-center">
+                    <input type="text" class="w-[69%] h-[70%] bg-[#00F0FF] mt-[.4vw] px-[1vw] outline-none placeholder:opacity-[.85] company-input" :placeholder="$root.VehicleShopName" v-model="$root.Inputs.CompanyNameInput">
+                    <div class="w-[29%] h-[70%] flex items-center justify-center bg-[#000000DE] mt-[.4vw] cursor-pointer" @click="$root.ChangeCompanyName()">
+                        <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['save'] }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-[35.4%] flex flex-col bg-[#000000BF] rounded-[.2604vw] mb-[.35vw]">
+                <div class="w-full h-[38.5%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-base font-semibold font-['Poppins'] top-[.775vw] absolute">{{ $root.Language['trasnfer_company'] }}</span>
+                        <div class="w-full bottom-[.55vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['trasnfer_company_description'] }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-full right-0 bottom-0 absolute">
+                </div>
+                <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                    <div class="w-[98%] h-[86%] flex flex-wrap top-[.3vw] absolute">
+                        <div class="w-[70.5%] h-full flex flex-col">
+                            <div class="w-full h-[58%] mb-[1%]">
+                                <input type="number" class="w-full h-full bg-[#00F0FF] px-[1w] outline-none placeholder:opacity-[.85] company-input" :placeholder="$root.Language['enter_player_id']" v-model="$root.Inputs.TransferIdInput">
+                            </div>
+                            <div class="w-full h-[43.5%]">
+                                <input type="number" class="w-full h-full bg-[#000000DE] px-[1w] outline-none placeholder:opacity-[.8] company-second-input" :placeholder="$root.Language['enter_sale_price']" v-model="$root.Inputs.TransferPriceInput">
+                            </div>
+                        </div>
+                        <div class="w-[29.5%] h-full flex items-start">
+                            <div class="w-full h-[55.5%] flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="$root.SendTransferRequest()">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['transfer'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-[35.4%] flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+                <div class="w-full h-[38.5%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-base font-semibold font-['Poppins'] top-[.775vw] absolute">{{ $root.Language['make_bulk_discount'] }}</span>
+                        <div class="w-full bottom-[.6vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['make_bulk_discount_description'] }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-full right-0 top-0 absolute">
+                </div>
+                <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                    <div class="w-[98%] h-[86%] flex flex-wrap top-[.3vw] absolute">
+                        <div class="w-[70.5%] h-full flex flex-col">
+                            <div class="w-full h-[58%] flex items-center justify-center bg-[#00F0FF] mb-[1%]">
+                                <span class="w-full text-black text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['discount_description'] }}</span>
+                            </div>
+                            <div class="w-full h-[43.5%]">
+                                <input type="number" class="w-full h-full bg-[#000000DE] px-[1w] outline-none placeholder:opacity-[.8] company-second-input" :placeholder="$root.Language['write_percent_value']" v-model="$root.Inputs.DiscountInput">
+                            </div>
+                        </div>
+                        <div class="w-[29.5%] h-full flex flex-col items-start">
+                            <div class="w-full h-[55.5%] flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="$root.MakeDiscount()">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['save'] }}</span>
+                            </div>
+                            <div class="w-full h-[2.5%]"></div>
+                            <div class="w-[99%] h-[42%] flex items-center justify-center bg-[#000000DE] ml-[1%] cursor-pointer" @click="$root.CancelDiscount()">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['cancel_discount'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-[49.5%] h-full flex flex-col">
+            <div class="w-full h-[27.5%] flex flex-col bg-[#000000BF] rounded-[.2604vw] mb-[.22vw]">
+                <div class="w-full h-[49%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-base font-semibold font-['Poppins'] top-[.775vw] absolute">{{ $root.Language['delete_all_logs'] }}</span>
+                        <div class="w-full bottom-[.55vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['delete_all_logs_description'] }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-full right-0 bottom-0 absolute">
+                </div>
+                <div class="w-full h-[51%] flex items-start justify-center">
+                    <div class="w-[69%] h-[70%] flex items-center justify-center bg-[#00F0FF] mt-[.4vw]">
+                        <span class="company-input">{{ $root.Language['delete_all_logs_information_text'] }}</span>
+                    </div>
+                    <div class="w-[29%] h-[70%] flex items-center justify-center bg-[#000000DE] mt-[.4vw] cursor-pointer" @click="$root.DeleteAllLogs()">
+                        <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['delete'] }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-[35.4%] flex flex-col bg-[#000000BF] rounded-[.2604vw] mb-[.35vw]">
+                <div class="w-full h-[38.5%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-base font-semibold font-['Poppins'] top-[.775vw] absolute">{{ $root.Language['bonuses_header'] }}</span>
+                        <div class="w-full bottom-[.55vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['bonuses_description'] }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-full right-0 bottom-0 absolute">
+                </div>
+                <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                    <div class="w-[98%] h-[86%] flex flex-wrap top-[.3vw] absolute">
+                        <div class="w-[70.5%] h-full flex flex-col">
+                            <div class="w-full h-[58%] mb-[1%]">
+                                <div class="w-full h-full flex items-center justify-center bg-[#00F0FF] ">
+                                    <span class="company-input">{{ $root.Language['bonuses_information'] }}</span>
+                                </div>
+                            </div>
+                            <div class="w-full h-[43.5%]">
+                                <input type="number" class="w-full h-full bg-[#000000DE] px-[1w] outline-none placeholder:opacity-[.8] company-second-input" :placeholder="$root.Language['enter_a_price']" v-model="$root.Inputs.BonusesInput">
+                            </div>
+                        </div>
+                        <div class="w-[29.5%] h-full flex items-start">
+                            <div class="w-full h-[55.5%] flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="$root.SendBonusToStaff()">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['send'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-[35.4%] flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+                <div class="w-full h-[38.5%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-base font-semibold font-['Poppins'] top-[.775vw] absolute">{{ $root.Language['raise_the_price'] }}</span>
+                        <div class="w-full bottom-[.6vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['raise_description'] }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-full right-0 bottom-0 absolute">
+                </div>
+                <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                    <div class="w-[98%] h-[86%] flex flex-wrap top-[.3vw] absolute">
+                        <div class="w-[70.5%] h-full flex flex-col">
+                            <div class="w-full h-[58%] flex items-center justify-center bg-[#00F0FF] mb-[1%]">
+                                <span class="w-full text-black text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['raise_information'] }}</span>
+                            </div>
+                            <div class="w-full h-[43.5%]">
+                                <input type="number" class="w-full h-full bg-[#000000DE] px-[1w] outline-none placeholder:opacity-[.8] company-second-input" :placeholder="$root.Language['write_percent_value']" v-model="$root.Inputs.RaiseInput">
+                            </div>
+                        </div>
+                        <div class="w-[29.5%] h-full flex flex-col items-start">
+                            <div class="w-full h-[55.5%] flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="$root.RaisePrices()">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['save'] }}</span>
+                            </div>
+                            <div class="w-full h-[2.5%]"></div>
+                            <!-- <div class="w-[99%] h-[42%] flex items-center justify-center bg-[#000000DE] ml-[1%] cursor-pointer">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['cancel_raise'] }}</span>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

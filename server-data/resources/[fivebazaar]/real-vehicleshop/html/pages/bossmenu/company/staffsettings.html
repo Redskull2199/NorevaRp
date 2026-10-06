@@ -1,0 +1,209 @@
+<div class="w-full h-full flex flex-col">
+    <div class="w-full h-[98%] flex flex-wrap justify-between">
+        <div class="w-[49.5%] h-full flex flex-col">
+            <div class="w-full h-[32%] flex flex-col bg-[#000000BF] rounded-[.2604vw] mb-[.2vw]">
+                <div class="w-full h-[38.5%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.8vw] absolute">{{ $root.Language['recruit_staff'] }}</span>
+                        <div class="w-full bottom-[.5vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['recruit_staff_description'] }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-[4vw] right-0 bottom-0 absolute">
+                </div>
+                <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                    <div class="w-[98%] h-[86%] flex flex-wrap top-[.3vw] absolute">
+                        <div class="w-[70.5%] h-full flex flex-col">
+                            <div class="w-full h-[58%] mb-[1%]">
+                                <input type="number" class="w-full h-full bg-[#00F0FF] px-[1w] outline-none placeholder:opacity-[.85] company-input" :placeholder="$root.Language['enter_player_id']" v-model="$root.Inputs.EmployeeIdInput">
+                            </div>
+                            <div class="w-full h-[43.5%]">
+                                <input type="number" class="w-full h-full bg-[#000000DE] px-[1w] outline-none placeholder:opacity-[.8] company-second-input" :placeholder="$root.Language['enter_the_salary']" v-model="$root.Inputs.EmployeeSalaryInput">
+                            </div>
+                        </div>
+                        <div class="w-[29.5%] h-full flex items-start">
+                            <div class="w-full h-[55.5%] flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="$root.SendJobRequest()">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['send_request'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-[32%] flex flex-col bg-[#000000BF] rounded-[.2604vw] mb-[.2vw]">
+                <div class="w-full h-[38.5%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.8vw] absolute">{{ $root.Language['salary_penalty'] }}</span>
+                        <div class="w-full bottom-[.5vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['salary_penalty_description'] }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-[4vw] right-0 bottom-0 absolute">
+                </div>
+                <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                    <div class="w-[98%] h-[86%] flex flex-wrap top-[.3vw] absolute">
+                        <div class="w-[70.5%] h-full flex flex-col">
+                            <div class="w-full h-[58%] mb-[1%]">
+                                <input type="number" class="w-full h-full bg-[#00F0FF] px-[1w] outline-none placeholder:opacity-[.85] company-input" :placeholder="$root.Language['enter_player_id']" v-model="$root.Inputs.SalaryPenaltyIdInput">
+                            </div>
+                            <div class="w-full h-[43.5%]">
+                                <input type="number" class="w-full h-full bg-[#000000DE] px-[1w] outline-none placeholder:opacity-[.8] company-second-input" :placeholder="$root.Language['penalty_time']" v-model="$root.Inputs.SalaryPenaltyInput">
+                            </div>
+                        </div>
+                        <div class="w-[29.5%] h-full flex items-start">
+                            <div class="w-full h-[55.5%] flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="$root.GiveSalaryPenalty()">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['punish'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-[34%] flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+                <div class="w-full h-[38%] rounded-t-[.2604vw] bg-[#000000DE] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.8vw] absolute">{{ $root.Language['list_of_personnel_with_salary_penalty'] }}</span>
+                        <div class="w-full bottom-[.7vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins'] mr-[.3vw]">{{ $root.Language['lopwsp_description'] }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/employee-bg.png" class="w-[13.3333vw] h-[3.85vw] right-0 bottom-0 absolute">
+                </div>
+                <div class="w-full h-[62%] flex items-center justify-center">
+                    <div class="w-full h-[90%] flex flex-col">
+                        <div v-for="(v, k) in $root.EmployeeWithPenaltyPage" class="w-full h-[48%] flex flex-wrap items-center bg-[#000000DE]" v-if="$root.EmployeeWithPenaltyPage.length > 0">
+                            <div class="w-full h-full flex flex-wrap items-center">
+                                <div class="w-[20.8%] h-full flex flex-wrap">
+                                    <div class="w-[31.3%] h-full flex items-center justify-end">
+                                        <div class="w-[80%] h-[72%] rounded-[50%] border-[.0521vw] border-[#00F0FF] mr-[.1vw]">
+                                            <img :src="$root.PlayerPfp" class="w-full h-full">
+                                        </div>
+                                    </div>
+                                    <div class="w-[68.7%] h-full flex flex-col justify-start justify-center">
+                                        <span class="w-full ml-[.3vw] text-white text-[.7292vw] font-medium font-['Poppins']">{{ $root.Language['staff'] }}</span>
+                                        <span class="w-full ml-[.3vw] text-neutral-400 text-[.5208vw] font-semibold font-['Poppins']">{{ v.name }}</span>
+                                    </div>
+                                </div>
+                                <div class="w-[.1%] h-[38%] bg-[#636363]"></div>
+                                <div class="w-[18.3%] h-full flex flex-col items-center justify-center">
+                                    <span class="w-full text-white text-[.7292vw] text-center font-medium font-['Poppins']">{{ $root.Language['rank'] }}</span>
+                                    <span class="w-full text-neutral-400 text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.GetPermLabel(v.rank) }}</span>
+                                </div>
+                                <div class="w-[.1%] h-[38%] bg-[#636363]"></div>
+                                <div class="w-[16%] h-full flex flex-col items-center justify-center">
+                                    <span class="w-full text-white text-[.7292vw] text-center font-medium font-['Poppins']">{{ $root.Language['salary'] }}</span>
+                                    <span class="w-full text-cyan-400 text-[.5208vw] text-center font-semibold font-['Poppins']">${{ v.salary }}</span>
+                                </div>
+                                <div class="w-[.1%] h-[38%] bg-[#636363]"></div>
+                                <div class="w-[20.8%] h-full flex flex-col items-center justify-center">
+                                    <span class="w-full text-white text-[.7292vw] text-center font-medium font-['Poppins']">{{ $root.Language['salary'] }}</span>
+                                    <span class="w-full text-red-600 text-[.5208vw] text-center font-semibold font-['Poppins']">{{ v.salarypenalty + ' ' + $root.Language['salary']}}</span>
+                                </div>
+                                <div class="w-[.1%] h-[38%] bg-[#636363]"></div>
+                                <div class="w-[23.7%] h-full flex flex-col items-center justify-center">
+                                    <div class="w-[80%] h-[55%] flex items-center justify-center bg-[#00F0FF] rounded-[.15vw] cursor-pointer" @click="$root.EndThePunishment(v.identifier)">
+                                        <span class="w-full text-white text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.Language['end_the_punishment'] }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full h-[48%]" v-else></div>
+                        <div class="w-full h-[13%]"></div>
+                        <div class="w-full h-[33%] flex flex-wrap">
+                            <div class="w-[.5%] h-full"></div>
+                            <div class="w-[53.5%] h-full flex items-center justify-end">
+                                <div class="w-[99%] h-full bg-[#5555554D] rounded-[.1563vw] relative">
+                                    <input type="text" class="w-[87%] h-full outline-none pl-[.5vw] bossmenu-classic-search-input left-0 absolute" :placeholder="$root.Language['bossmenu_search_input']" v-model="$root.Inputs.PenaltySearchInput">
+                                    <div class="w-[13%] h-full flex items-center justify-center right-0 absolute">
+                                        <inlinesvg class="w-[.9375vw] h-[.9375vw] flex item-center justify-center" src="./img/bossmenu/search.svg"></inlinesvg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-[30.5%] h-full"></div>
+                            <div class="w-[13%] h-full flex items-center justify-between">
+                                <div class="w-[42%] h-full flex items-center justify-center bg-[#000000] rounded-[.1563vw] cursor-pointer" :class="{ 'cursor-not-allowed': $root.BossmenuPageSettings.EmployeeWithPenaltyPage == 1 }" @click="$root.PrevPage('employeewithpenalty')">
+                                    <inlinesvg class="h-[.6vw] h-[.6vw] flex items-center justify-center" src="./img/svg/left.svg"></inlinesvg>
+                                </div>
+                                <div class="w-[42%] h-full flex items-center justify-center bg-[#000000] rounded-[.1563vw] cursor-pointer" :class="{ 'cursor-not-allowed': $root.BossmenuPageSettings.EmployeeWithPenaltyPage >= $root.TotalBossmenuPages('employeewithpenalty') }" @click="$root.NextPage('employeewithpenalty')">
+                                    <inlinesvg class="h-[.6vw] h-[.6vw] flex items-center justify-center" src="./img/svg/right.svg"></inlinesvg>
+                                </div>
+                            </div>
+                            <div class="w-[2.5%] h-full"></div>
+                        </div>
+                        <div class="w-full h-[1%]"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-[49.5%] h-full flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+            <div class="w-full h-[12%] bg-[#000000BF] relative">
+                <img src="./img/bossmenu/employee-bg.png" class="w-[13.3333vw] h-[3.63vw] right-0 bottom-0 absolute">
+                <div class="w-[73%] h-full flex flex-col items-start justify-center left-[1.5%] top-0 absolute">
+                    <span class="w-full text-[#C3C3C3] text-[.8333vw] font-semibold font-['Poppins'] mt-[.2vw]">{{ $root.Language['staff_settings_header'] }}</span>
+                    <span class="w-full text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['staff_settings_description'] }}</span>
+                </div>
+            </div>
+            <div class="w-full h-[1%]"></div>
+            <div class="w-full h-[74%] flex flex-col flex items-center justify-start">
+                <div v-if="$root.FilterEmployeesTable.length > 0" v-for="(v, k) in $root.EmployeesPage" class="w-[99%] h-[10%] flex flex-wrap flex items-center bg-[#000000DE] rounded-[.1563vw] mt-[.3vw] mb-[.25vw]">
+                    <div class="w-[21.5%] h-full flex flex-wrap justify-between">
+                        <div class="w-[27.5%] h-full flex items-center justify-center">
+                            <div class="w-[76%] h-[75%] border-[.0521vw] border-[#00F0FF] rounded-[50%]">
+                                <img :src="v.pp" class="w-full h-full"> 
+                            </div>
+                        </div>
+                        <div class="w-[70%] h-full flex flex-col">
+                            <span class="w-full text-white text-[.7292vw] font-medium font-['Poppins'] mt-[.2vw]">{{ $root.Language['staff'] }}</span>
+                            <span class="w-full text-neutral-400 text-[.5208vw] font-semibold font-['Poppins'] mb-[.4vw]">{{ v.name }}</span>
+                        </div>
+                    </div>
+                    <div class="w-[.1%] h-[38%] bg-[#636363]"></div>
+                    <div class="w-[20%] h-full flex flex-col items-center justify-center">
+                        <span class="w-full text-white text-[.7292vw] text-center font-medium font-['Poppins'] mt-[.3vw]">{{ $root.Language['rank'] }}</span>
+                        <span class="w-full text-neutral-400 text-[.5208vw] text-center font-semibold font-['Poppins'] mb-[.4vw]">{{ $root.GetPermLabel(v.rank) }}</span>
+                    </div>
+                    <div class="w-[.1%] h-[38%] bg-[#636363]"></div>
+                    <div class="w-[20%] h-full flex flex-col items-center justify-center">
+                        <span class="w-full text-white text-[.7292vw] text-center font-medium font-['Poppins'] mt-[.3vw]">{{ $root.Language['salary'] }}</span>
+                        <div class="w-full text-cyan-400 text-[.5208vw] text-center font-semibold font-['Poppins'] mb-[.4vw]">${{ $root.FormatMoney(v.salary) }}</div>
+                    </div>
+                    <div class="w-[.1%] h-[38%] bg-[#636363]"></div>
+                    <div class="w-[38.2%] h-full flex flex-wrap items-center justify-evenly" v-if="v.name != $root.PlayerName">
+                        <div class="w-[31%] h-[53%] flex items-center justify-center rounded-[.1vw] bg-[#5E5E5E] cursor-pointer" @click="$root.RankUpEmployee(v.identifier)">
+                            <span class="w-full text-white text-[.49vw] text-center font-semibold font-['Poppins']">{{ $root.Language['rank_up'] }}</span>
+                        </div>
+                        <div class="w-[31%] h-[53%] flex items-center justify-center rounded-[.1vw] bg-[#5E5E5E] cursor-pointer" @click="$root.ReduceEmployeeRank(v.identifier)">
+                            <span class="w-full text-white text-[.49vw] text-center font-semibold font-['Poppins']">{{ $root.Language['reduce_rank'] }}</span>
+                        </div>
+                        <div class="w-[31%] h-[53%] flex items-center justify-center rounded-[.1vw] bg-[#00F0FF] cursor-pointer" @click="$root.FireEmployee(v.identifier)">
+                            <span class="w-full text-white text-[.49vw] text-center font-semibold font-['Poppins']">{{ $root.Language['fire'] }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div v-else class="w-[98.5%] h-[14%] flex items-center justify-center mt-[.3vw]">
+                    <span class="w-full text-zinc-600 text-[1vw] text-center font-semibold font-['Poppins']">{{ $root.Language['no_data'] }}</span>
+                </div>
+            </div>
+            <div class="w-full h-[3.7%]"></div>
+            <div class="w-full h-[6%] flex flex-wrap">
+                <div class="w-[1.2%] h-full"></div>
+                <div class="w-[97.6%] h-full flex items-center justify-between">
+                    <div class="w-[54%] h-full flex bg-[#5555554D] rounded-[.1563vw] relative">
+                        <input type="text" class="w-[88%] h-full outline-none pl-[.5vw] bossmenu-classic-search-input left-0 absolute" :placeholder="$root.Language['bossmenu_search_input']" v-model="$root.Inputs.EmployeesInput">
+                        <div class="w-[12%] h-full flex items-center justify-center right-0 absolute">
+                            <inlinesvg class="w-[.9375vw] h-[.9375vw] flex item-center justify-center" src="./img/bossmenu/search.svg"></inlinesvg>
+                        </div>
+                    </div>
+                    <div class="w-[12%] h-full flex items-center justify-between">
+                        <div class="w-[42%] h-full flex items-center justify-center bg-[#000000] rounded-[.1563vw] cursor-pointer" :class="{ 'cursor-not-allowed': $root.BossmenuPageSettings.EmployeesPage == 1 }" @click="$root.PrevPage('employee')">
+                            <inlinesvg class="h-[.6vw] h-[.6vw] flex items-center justify-center" src="./img/svg/left.svg"></inlinesvg>
+                        </div>
+                        <div class="w-[42%] h-full flex items-center justify-center bg-[#000000] rounded-[.1563vw] cursor-pointer" :class="{ 'cursor-not-allowed': $root.BossmenuPageSettings.EmployeesPage == $root.TotalBossmenuPages('employee') }" @click="$root.NextPage('employee')">
+                            <inlinesvg class="h-[.6vw] h-[.6vw] flex items-center justify-center" src="./img/svg/right.svg"></inlinesvg>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-[1.2%] h-full"></div>
+            </div>
+            <div class="w-full h-[3.3%]"></div>
+        </div>
+    </div>
+</div>

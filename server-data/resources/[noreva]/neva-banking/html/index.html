@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noreva Banking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=4">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+
+<body>
+    <div id="notification-container"></div>
+    <div id="app" style="display: none;">
+        <div class="particles-toggle">
+            <span>Particles</span>
+            <label class="switch">
+                <input type="checkbox" id="particles-toggle" checked>
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div id="particles-js"></div>
+
+        <div id="bank-ui" class="ui-container tablet-container" style="display: none;">
+            <div class="sidebar">
+                <div class="logo">
+                    <img src="https://cdn.discordapp.com/attachments/1320813057252917350/1556806303001743471/293baa53-166e-4a2e-92e0-2e9913c4b3d3.png?backend=b2&ex=6ac5805a&is=6ac42eda&hm=138cf81a1133569a5546e5b5251c834393ce587a42d2435eb8dc89dd45648c72&"
+                        alt="" class="bank-logo" id="logo-img">
+                    <div class="logo-text">
+                        <span class="brand-name">Noreva</span>
+                        <span class="brand-suffix">Bank</span>
+                    </div>
+                </div>
+                <nav>
+                    <a href="#" class="nav-btn active" data-target="dashboard" data-i18n="ui_dashboard"><i
+                            class="fas fa-home"></i> Dashboard</a>
+                    <a href="#" class="nav-btn" data-target="transactions" data-i18n="ui_transfer"><i
+                            class="fas fa-exchange-alt"></i>
+                        Transfer</a>
+                    <a href="#" class="nav-btn" data-target="settings" data-i18n="ui_settings"><i
+                            class="fas fa-cog"></i> Settings</a>
+                </nav>
+                <div class="user-info">
+                    <div class="avatar"><i class="fas fa-user"></i></div>
+                    <div class="details">
+                        <span id="user-name">Welcome</span>
+                        <small>Member</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div id="dashboard" class="tab-content active">
+                    <header>
+                        <h1 data-i18n="ui_overview">Overview</h1>
+                        <button class="close-btn"><i class="fas fa-times"></i></button>
+                    </header>
+                    <div class="cards-row">
+                        <div class="balance-card">
+                            <h3 data-i18n="ui_available_balance">Available Balance</h3>
+                            <h2 id="bank-balance">$0</h2>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="cashflowChart"></canvas>
+                    </div>
+                    <div class="recent-transactions">
+                        <h3 data-i18n="ui_recent_transactions">Recent Transactions</h3>
+                        <ul id="tx-list">
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="transactions" class="tab-content">
+                    <header>
+                        <h1 data-i18n="ui_transfer">Transactions</h1>
+                        <button class="close-btn"><i class="fas fa-times"></i></button>
+                    </header>
+                    <div class="action-grid">
+                        <div class="action-box">
+                            <h3 data-i18n="ui_deposit">Deposit</h3>
+                            <input type="number" id="deposit-amount" placeholder="Amount" data-i18n="ui_amount">
+                            <button id="btn-deposit" class="primary-btn" data-i18n="ui_deposit">Deposit</button>
+                        </div>
+                        <div class="action-box">
+                            <h3 data-i18n="ui_withdraw">Withdraw</h3>
+                            <input type="number" id="withdraw-amount" placeholder="Amount" data-i18n="ui_amount">
+                            <button id="btn-withdraw" class="primary-btn" data-i18n="ui_withdraw">Withdraw</button>
+                        </div>
+                        <div class="action-box full-width">
+                            <h3 data-i18n="ui_transfer_funds">Transfer</h3>
+                            <div class="transfer-inputs">
+                                <input type="number" id="transfer-id" placeholder="Player ID" data-i18n="ui_target_id">
+                                <input type="number" id="transfer-amount" placeholder="Amount" data-i18n="ui_amount">
+                            </div>
+                            <button id="btn-transfer" class="primary-btn" data-i18n="ui_send_money">Send Money</button>
+                        </div>
+                    </div>
+
+                    <div class="recent-transactions mt-4">
+                        <h3 data-i18n="ui_recent_transactions">Full Transaction History</h3>
+                        <ul id="history-list">
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="settings" class="tab-content">
+                    <header>
+                        <h1 data-i18n="ui_atm_card_settings">Card Settings</h1>
+                        <button class="close-btn"><i class="fas fa-times"></i></button>
+                    </header>
+
+                    <div class="card-preview-container">
+                        <div class="card-preview">
+                            <div class="card-chip"></div>
+                            <div class="card-brand">VISA</div>
+                            <div class="card-overlay">
+                                <div class="card-number">•••• •••• •••• ••••</div>
+                                <div class="card-name" id="card-name-display">YOUR NAME HERE</div>
+                                <div class="card-expiry">MM/YY</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="card-creation-form" class="settings-box">
+                        <h3 data-i18n="ui_create_card"><i class="fas fa-credit-card"></i> Create Your Card</h3>
+                        <p data-i18n="ui_set_pin">Enter your details to create your bank card.</p>
+
+                        <div class="form-group">
+                            <label data-i18n="ui_card_name">Card Holder Name</label>
+                            <input type="text" id="card-name-input" placeholder="Ad Soyad" data-i18n="ui_card_name"
+                                maxlength="30">
+                        </div>
+
+                        <div class="form-group">
+                            <label data-i18n="ui_set_pin">ATM PIN</label>
+                            <input type="password" id="pin-input" maxlength="4" placeholder="****">
+                        </div>
+
+                        <button id="btn-create-card" class="primary-btn" data-i18n="ui_create">Create Card</button>
+                        <p id="creation-status" class="status-msg"></p>
+                    </div>
+
+                    <div id="card-management" class="settings-grid" style="display: none;">
+                        <div class="settings-box">
+                            <h3 data-i18n="ui_card_name"><i class="fas fa-info-circle"></i> Card Info</h3>
+                            <p><strong>Card Holder:</strong> <span id="card-info-name">-</span></p>
+                            <p><strong>PIN Status:</strong> <span id="card-info-pin">Set</span></p>
+                        </div>
+
+                        <div class="settings-box">
+                            <h3 data-i18n="ui_reset_pin"><i class="fas fa-lock"></i> Reset PIN</h3>
+                            <p data-i18n="ui_reset_pin">Enter your current PIN to set a new one.</p>
+                            <input type="password" id="current-pin" maxlength="4" placeholder="Current PIN"
+                                data-i18n="ui_current_pin">
+                            <input type="password" id="new-pin" maxlength="4" placeholder="New PIN"
+                                data-i18n="ui_new_pin">
+                            <button id="btn-reset-pin" class="primary-btn" style="background: var(--danger);"
+                                data-i18n="ui_reset">Reset PIN</button>
+                            <p id="pin-status" class="status-msg"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="atm-ui" class="ui-container atm-container" style="display: none;">
+            <div id="atm-login" class="atm-screen active">
+                <div class="atm-login-inner">
+                    <div class="atm-login-header">
+                        <i class="fas fa-credit-card atm-icon"></i>
+                        <h2 data-i18n="ui_atm_title">NEVA ATM</h2>
+                        <div class="atm-display">
+                            <span id="atm-pin-display">_ _ _ _</span>
+                        </div>
+                    </div>
+                    <div class="atm-numpad">
+                        <button class="numpad-btn" data-val="1">1</button>
+                        <button class="numpad-btn" data-val="2">2</button>
+                        <button class="numpad-btn" data-val="3">3</button>
+                        <button class="numpad-btn" data-val="4">4</button>
+                        <button class="numpad-btn" data-val="5">5</button>
+                        <button class="numpad-btn" data-val="6">6</button>
+                        <button class="numpad-btn" data-val="7">7</button>
+                        <button class="numpad-btn" data-val="8">8</button>
+                        <button class="numpad-btn" data-val="9">9</button>
+                        <button class="numpad-btn numpad-clear" data-val="clear">⌫</button>
+                        <button class="numpad-btn" data-val="0">0</button>
+                        <button class="numpad-btn numpad-enter" id="btn-atm-login" data-val="enter">OK</button>
+                    </div>
+                    <button class="atm-cancel-btn close-btn" data-i18n="ui_cancel">CANCEL</button>
+                </div>
+            </div>
+
+            <div id="atm-main" class="atm-screen">
+                <div class="atm-two-col">
+                    <div class="atm-left">
+                        <div class="atm-display">
+                            <span id="atm-amount-display">0</span>
+                        </div>
+                        <div class="atm-numpad">
+                            <button class="numpad-btn" data-atm-val="1">1</button>
+                            <button class="numpad-btn" data-atm-val="2">2</button>
+                            <button class="numpad-btn" data-atm-val="3">3</button>
+                            <button class="numpad-btn" data-atm-val="4">4</button>
+                            <button class="numpad-btn" data-atm-val="5">5</button>
+                            <button class="numpad-btn" data-atm-val="6">6</button>
+                            <button class="numpad-btn" data-atm-val="7">7</button>
+                            <button class="numpad-btn" data-atm-val="8">8</button>
+                            <button class="numpad-btn" data-atm-val="9">9</button>
+                            <button class="numpad-btn numpad-clear" data-atm-val="clear">⌫</button>
+                            <button class="numpad-btn" data-atm-val="0">0</button>
+                            <button class="numpad-btn numpad-enter" data-atm-val="enter">OK</button>
+                        </div>
+                    </div>
+                    <div class="atm-right">
+                        <div class="atm-right-header">
+                            <h2 data-i18n="ui_atm_title">NEVA ATM</h2>
+                            <div class="atm-balance-label">Balance</div>
+                            <h1 id="atm-balance" class="atm-balance">$0</h1>
+                        </div>
+                        <div class="atm-right-actions">
+                            <button id="btn-atm-withdraw" class="atm-action-btn withdraw-btn" data-i18n="ui_withdraw">
+                                <i class="fas fa-arrow-up"></i>
+                                WITHDRAW
+                            </button>
+                            <button id="btn-atm-deposit" class="atm-action-btn deposit-btn" data-i18n="ui_deposit">
+                                <i class="fas fa-arrow-down"></i>
+                                DEPOSIT
+                            </button>
+                            <button class="atm-cancel-btn close-btn">
+                                <i class="fas fa-times"></i>
+                                CANCEL
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

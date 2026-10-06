@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Exo+2:wght@400;600;800&display=swap');
+
+:root {
+    --bg:          #080b10;
+    --panel:       #0d1117;
+    --border:      #1e2d3d;
+    --accent:      #00e5ff;
+    --accent2:     #ff4b6e;
+    --gold:        #ffd700;
+    --text:        #cdd6f4;
+    --text-dim:    #6e7a8a;
+    --win:         #39ff14;
+    --item-bg:     #101820;
+    --item-border: #1e3045;
+    --glow:        rgba(0, 229, 255, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    background: transparent !important;
+    font-family: 'Rajdhani', sans-serif;
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Ana container ── */
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#case-open-wrapper {
+    width: 980px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ── Başlık ── */
+#case-header {
+    position: relative;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+#header-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 120% at 50% 50%, rgba(0,229,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+#case-title {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-shadow: 0 0 18px rgba(0, 229, 255, 0.7);
+    display: block;
+    margin-bottom: 10px;
+}
+
+#header-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.5;
+}
+
+/* ── Spinner sarmalayıcı ── */
+.roller-wrap {
+    position: relative;
+    height: 110px;
+}
+
+.edge-fade {
+    position: absolute;
+    top: 0;
+    width: 140px;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+.edge-fade.left  { left:  0; background: linear-gradient(90deg,  var(--bg), transparent); }
+.edge-fade.right { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
+
+/* Orta işaretçi */
+.center-marker {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+.marker-triangle {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+}
+.marker-triangle.top    { border-top:    9px solid var(--accent2); }
+.marker-triangle.bottom { border-bottom: 9px solid var(--accent2); }
+.marker-line {
+    flex: 1;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent2), rgba(255,75,110,0.2));
+}
+
+/* ── Raffle roller ── */
+.raffle-roller-holder {
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    position: absolute;
+    inset: 0;
+    height: 110px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,0,0,0.4);
+}
+
+.raffle-roller-container {
+    width: 9999999999999999999px;
+    max-width: 999999999999999999px;
+    height: 110px;
+    background: var(--panel);
+    margin-left: 0;
+    transition: all 8s cubic-bezier(.08,.6,0,1);
+    display: flex;
+    align-items: center;
+}
+
+/* ── Item kartları ── */
+.item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0 3px;
+    width: 90px;
+    height: 96px;
+    border: 1px solid var(--item-border);
+    background: var(--item-bg);
+    background-size: 78%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 4px;
+    position: relative;
+    transition: border-color 0.3s;
+}
+
+.item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 60%);
+    border-radius: 3px;
+    pointer-events: none;
+}
+
+.class_red_item {
+    border-bottom: 3px solid #00bcd4;
+}
+.class_purple_item {
+    border-bottom: 3px solid #9c27b0;
+}
+.class_gold_item {
+    border-bottom: 3px solid var(--gold);
+}
+
+/* Kazanan item */
+.winning-item {
+    border: 2px solid var(--win) !important;
+    border-bottom: 4px solid var(--win) !important;
+    box-shadow: 0 0 22px rgba(57, 255, 20, 0.55), inset 0 0 14px rgba(57, 255, 20, 0.08);
+    animation: winPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes winPulse {
+    from { box-shadow: 0 0 14px rgba(57,255,20,0.4), inset 0 0 8px rgba(57,255,20,0.05); }
+    to   { box-shadow: 0 0 34px rgba(57,255,20,0.75), inset 0 0 20px rgba(57,255,20,0.12); }
+}
+
+/* ── Alt bilgi ── */
+#case-footer {
+    text-align: center;
+    margin-top: 16px;
+}
+
+#footer-hint {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+}
+
+/* ── Görünüm animasyonu ── */
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+#case-open-wrapper {
+    animation: fadeSlideIn 0.5s ease-out;
+}

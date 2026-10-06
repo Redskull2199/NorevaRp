@@ -1,0 +1,318 @@
+@font-face {
+    src: url("../html/fonts/Poppins-Regular.ttf");
+    font-family: "regular";
+}
+
+@font-face {
+    src: url("../html/fonts/Poppins-Medium.ttf");
+    font-family: "medium";
+} 
+
+@font-face {
+    src: url("../html/fonts/Poppins-Bold.ttf");
+    font-family: "bold";
+}
+
+@font-face {
+    src: url("../html/fonts/Creattion.otf");
+    font-family: 'Creattion';
+}
+
+*{
+    overflow: hidden !important;
+}
+
+html {
+    user-select: none;  
+}
+  
+body {
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0vw;
+    background: transparent;
+}
+
+.feedback-container::-webkit-scrollbar {
+    width: .3vw;
+    border-radius: 1vw;
+}
+
+.feedback-container::-webkit-scrollbar-track {
+    background: #7B7B7BCC;
+    border-radius: 1vw;
+}
+
+.feedback-container::-webkit-scrollbar-thumb {
+    background: white; 
+    border-radius: 1vw;
+}
+
+.feedback-container::-webkit-scrollbar-thumb:hover {
+  background: white; 
+  border-radius: 1vw;
+}
+
+.colorstable-container::-webkit-scrollbar {
+    width: .15vw;
+    border-radius: 1vw;
+}
+
+.colorstable-container::-webkit-scrollbar-track {
+    background: #7B7B7BCC;
+    border-radius: 1vw;
+}
+
+.colorstable-container::-webkit-scrollbar-thumb {
+    background: white; 
+    border-radius: 1vw;
+}
+
+.colorstable-container::-webkit-scrollbar-thumb:hover {
+  background: white; 
+  border-radius: 1vw;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.color-text {
+    color: #FFF;
+    font-family: regular;
+    text-align: center;
+    font-size: .7292vw;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.plate-input {
+    color: rgb(22, 103, 255);
+    font-family: medium;
+    text-align: center;
+    font-size: 1.5vw;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.plate-input::placeholder {
+    color: rgba(22, 104, 255, 0.541);
+    font-family: medium;
+    text-align: center;
+    font-size: 1.5vw;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.search-input {
+    color: #FFF;
+    font-family: regular;
+    font-size: .8333vw;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.search-input::placeholder {
+    color: #ffffff;
+    font-family: regular;
+    font-size: .8333vw;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    opacity:  0.74;
+}
+
+.timer {
+    background: -webkit-linear-gradient(left, var(--background-color) 50%, #535353 50%);
+    border-radius: 100%;
+    width: calc(var(--size) * 1vw);
+    height: calc(var(--size) * 1vw);
+    position: relative;
+    -webkit-mask: radial-gradient(circle, transparent 53%, #000 59%);
+    mask: radial-gradient(circle, transparent 53%, #000 59%);
+}
+
+.mask {
+    border-radius: 100% 0 0 100% / 50% 0 0 50%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    -webkit-animation: mask calc(var(--duration) * 1s) steps(500, start) infinite;
+    -webkit-transform-origin: 100% 50%;
+}
+
+@-webkit-keyframes mask {
+    0% {
+        background: #535353;
+        -webkit-transform: rotate(0deg);
+    }
+    50% {
+        background: #535353;
+        -webkit-transform: rotate(-180deg);
+    }
+    50.01% {
+        background: var(--background-color);
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        background: var(--background-color);
+        -webkit-transform: rotate(-180deg);
+    }
+}
+
+.active-star path {
+    fill: #00F0FF;
+}
+
+.feedback-input {
+    color: #B1B1B1;
+    font-family: Poppins;
+    font-size: .7292vw;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border: .0521vw solid #8C8C8C;
+}
+
+.feedback-input::placeholder {
+    color: #B1B1B1;
+    font-family: Poppins;
+    font-size: .7292vw;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    opacity: .8;
+}
+
+.bossmenu-classic-search-input, .bossmenu-classic-search-input::placeholder {
+    color: #868686;
+    font-family: Poppins;
+    font-size: .7292vw;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.company-input, .company-input::placeholder {
+    color: #000;
+    text-align: center;
+    font-family: Poppins;
+    font-size: .7813vw;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.company-second-input, .company-second-input::placeholder {
+    color: #A8A8A8;
+    text-align: center;
+    font-family: Poppins;
+    font-size: .7813vw;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.depositwithdrawinput, .depositwithdrawinput::placeholder {
+    color: #7EF7FF;
+    text-align: center;
+    font-family: Poppins;
+    font-size: .7813vw;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.permission-container:nth-child(even) {
+    margin-left: 1.6%;
+}
+
+.toggle-perm {
+    transition: background-color 0.3s;
+}
+
+.toggle-perm.active {
+    background-color: #4B4B4B;
+}
+
+.toggle-circle {
+    transition: left 0.3s;
+}
+
+.toggle-perm.active .toggle-circle {
+    left: calc(100% - 1.3021vw);
+}
+
+.no-margin {
+    margin-right: 0 !important;
+}
+
+.search-input-second, .search-input-second::placeholder {
+    color: #868686;
+    font-family: Poppins;
+    font-size: .7292vw;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.vehicles-screen-input {
+    color: #000;
+    text-align: center;
+    font-family: Poppins;
+    font-size: .7813vw;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.vehicles-screen-second-input {
+    color: #A8A8A8;
+    text-align: center;
+    font-family: Poppins;
+    font-size: .7813vw;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+select::-webkit-scrollbar {
+    display: none;
+} 
+
+select option {
+    background-color: #D9D9D9;
+    text-align: center;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 700;
+    height: 15vw;
+    line-height: 99.5%;
+    color: rgba(0, 0, 0);
+    text-shadow: 0vw 0vw 1.8229vw rgba(255, 255, 255, 0.45);
+}
+
+select {
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.4vw;
+    color: rgba(255, 255, 255, 0.007);
+    border: none;
+    background: none;
+    width: 50%;
+    height: 100%;
+    resize: none;
+    outline: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}

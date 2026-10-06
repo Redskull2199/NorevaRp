@@ -1,0 +1,1 @@
+import{M as e,R as t,in as n,m as r}from"./index-B9-rBG8g.js";async function i(r){let{signedOut:i}=await e(r);return t([r]),n(`${r}:`),i}async function a(){let{signedOut:i}=await e();t(r);for(let e of r)n(`${e}:`);return i}export{a as n,i as t};

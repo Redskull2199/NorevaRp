@@ -1,0 +1,18 @@
+Locales['hi'] = {
+    ['opencarplay'] = 'कारप्ले खोलें',
+    ['nocarplay'] = 'आपके पास कारप्ले आइटम नहीं है!',
+    ['notincar'] = 'आप कार में नहीं हैं!',
+    ['already_installed'] = 'इस कार में पहले से ही कारप्ले स्थापित है!',
+    ['installed'] = 'कारप्ले स्थापित कर दिया गया है!',
+    ['notinstalled'] = 'इस कार में कारप्ले स्थापित नहीं है!',
+    ['notmechanic'] = 'आप एक मैकेनिक नहीं हैं, केवल मैकेनिक ही कारप्ले स्थापित कर सकते हैं!',
+    ['damaged'] = 'यह कार क्षतिग्रस्त है, आप कारप्ले का उपयोग नहीं कर सकते!',
+    ['notdriver'] = 'आप चालक नहीं हैं, आप कारप्ले का उपयोग नहीं कर सकते!',
+    ['autopilot_no_waypoint'] = 'कोई वेपॉइंट सेट नहीं है',
+    ['autopilot_reached_destionation'] = "हम अपने वेपॉइंट पर पहुँच गए हैं।",
+    ['progress_bar_text'] = "कारप्ले स्थापित हो रहा है...",
+    ['go_inside'] = "You need to go into a Vehicle to install Carplay",
+    ['autopilot_disengaged'] = "Autopilot disengaged, you have control.",
+    ['go_outside'] = "Carplay install karne ke liye vehicle se bahar jaayein",
+    ['removed'] = "Carplay hata diya gaya hai!",
+}

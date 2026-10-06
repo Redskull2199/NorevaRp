@@ -1,0 +1,24 @@
+{
+    "Web": {
+        "type_a_message": "संदेश टाइप करें...",
+        "chat_settings": "चैट सेटिंग्स",
+        "chat_settings_description": "चैट पैनल को अनुकूलित करें",
+        "chat_theme": "चैट थीम",
+        "chat_theme_description": "चैट थीम को दूसरे डिज़ाइन में बदलें",
+        "main_color": "मुख्य रंग",
+        "main_color_description": "चैट का मुख्य रंग बदलें",
+        "position": "स्थिति",
+        "position_description": "चैट की स्थिति बदलें",
+        "size": "आकार",
+        "size_description": "चैट का आकार बदलें",
+        "small": "छोटा",
+        "medium": "मध्यम",
+        "large": "बड़ा",
+        "command_list": "कमांड सूची",
+        "save_changes": "परिवर्तन सहेजें",
+        "close": "बंद करें",
+        "res_chat": "चैट रीसेट करें",
+        "suggestion": "सुझाव"
+    },
+    "Lua": {}
+}

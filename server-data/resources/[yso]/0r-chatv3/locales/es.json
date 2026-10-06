@@ -1,0 +1,26 @@
+{
+    "Web": {
+        "type_a_message": "Escribe un mensaje...",
+        "chat_settings": "Configuración del Chat",
+        "chat_settings_description": "Personalizar el panel de chat",
+        "chat_theme": "Tema del Chat",
+        "chat_theme_description": "Cambiar el tema del chat a otro diseño",
+        "main_color": "Color Principal",
+        "main_color_description": "Cambiar el color principal del chat",
+        "position": "Posición",
+        "position_description": "Cambiar la posición del chat",
+        "size": "Tamaño",
+        "size_description": "Cambiar el tamaño del chat",
+        "small": "Pequeño",
+        "medium": "Mediano",
+        "large": "Grande",
+        "command_list": "Lista de Comandos",
+        "save_changes": "Guardar Cambios",
+        "close": "Cerrar",
+        "res_chat": "Reiniciar Chat",
+        "suggestion": "Sugerencia",
+        "music": "MÚSICA",
+        "now_playing": "Reproduciendo Ahora"
+    },
+    "Lua": {}
+}

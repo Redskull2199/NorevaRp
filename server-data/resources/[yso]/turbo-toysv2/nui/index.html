@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Turbo Toys</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Preload click sound -->
+  <audio id="click-sound" src="assets/click.mp3" preload="auto"></audio>
+
+  <div id="root" class="hidden">
+    <div class="panel">
+      <div class="halo"></div>
+      <div class="meniscus"></div>
+      <div class="inner-glow"></div>
+      <div class="grain"></div>
+
+      <!-- ====================== MAIN ====================== -->
+      <section class="screen" data-screen="main">
+        <header class="title-block">
+          <h1 class="title" data-t="menu_title" data-t-style="letter">TOY MENU</h1>
+        </header>
+
+        <div class="ruler"></div>
+
+        <div class="actions">
+          <button class="row" data-action="position">
+            <span class="dot dot-rose"></span>
+            <span class="row-text">
+              <span class="row-label" data-t="action_position">Pozisyon Seç</span>
+              <span class="row-meta" data-t="action_position_desc">tutuş şeklini ayarla</span>
+            </span>
+            <span class="kbd">1</span>
+          </button>
+
+          <button class="row" data-action="gizmo">
+            <span class="dot dot-violet"></span>
+            <span class="row-text">
+              <span class="row-label" data-t="action_gizmo">3D Gizmo</span>
+              <span class="row-meta" data-t="action_gizmo_desc">serbest yerleştir + kaydet</span>
+            </span>
+            <span class="kbd">2</span>
+          </button>
+
+          <button class="row" data-action="place-vehicle">
+            <span class="dot dot-cyan"></span>
+            <span class="row-text">
+              <span class="row-label" data-t="action_place_vehicle">Place on Vehicle</span>
+              <span class="row-meta" data-t="action_place_vehicle_desc">attach to nearest vehicle</span>
+            </span>
+            <span class="kbd">V</span>
+          </button>
+
+          <button class="row" data-action="light">
+            <span class="dot dot-amber"></span>
+            <span class="row-text">
+              <span class="row-label" data-t="action_light">Işık Saç</span>
+              <span class="row-meta" data-t="action_light_desc">parlama efekti</span>
+            </span>
+            <span class="kbd">3</span>
+          </button>
+
+          <button class="row" data-action="scale">
+            <span class="dot dot-rose"></span>
+            <span class="row-text">
+              <span class="row-label" data-t="action_scale">Boyut Ayarla</span>
+              <span class="row-meta" data-t="action_scale_desc">prop büyüklüğünü değiştir</span>
+            </span>
+            <span class="kbd">4</span>
+          </button>
+
+          <button class="row" data-action="drop-focused">
+            <span class="dot" style="background:#ef4444"></span>
+            <span class="row-text">
+              <span class="row-label" data-t="action_drop_focused">Remove This Toy</span>
+              <span class="row-meta" data-t="action_drop_focused_desc">only the focused one is removed</span>
+            </span>
+            <span class="kbd">X</span>
+          </button>
+
+          <button class="row" data-action="drop-all">
+            <span class="dot" style="background:#7f1d1d"></span>
+            <span class="row-text">
+              <span class="row-label" data-t="action_drop_all">Remove All Toys</span>
+              <span class="row-meta" data-t="action_drop_all_desc">wipe all attached toys</span>
+            </span>
+            <span class="kbd">Z</span>
+          </button>
+        </div>
+
+        <!-- ====================== SETTINGS ====================== -->
+        <div class="ruler"></div>
+        <div class="section-label">
+          <span data-t="section_settings">AYARLAR</span>
+        </div>
+        <div class="actions">
+          <button class="row settings-row" data-action="toggle-sound">
+            <span class="row-text">
+              <span class="row-label" data-t="setting_sound">Ses Efekti</span>
+              <span class="row-meta" id="sound-state-label">Açık</span>
+            </span>
+            <span class="toggle-switch" id="sound-switch" data-on="true">
+              <span class="toggle-thumb"></span>
+            </span>
+          </button>
+        </div>
+
+        <div class="ruler ruler-bottom"></div>
+        <footer class="foot">
+          <span><span class="kbd kbd-foot">ESC</span> <span data-t="close_kbd">KAPAT</span></span>
+          <span class="ver" id="main-toy-label">v3 · TURBO SCRIPTS</span>
+        </footer>
+      </section>
+
+      <!-- ====================== POSITIONS ====================== -->
+      <section class="screen hidden" data-screen="positions">
+        <header class="title-block">
+          <h1 class="title title-sm" data-t="action_position">POZİSYON</h1>
+        </header>
+
+        <div class="ruler"></div>
+
+        <!-- BODY section -->
+        <div class="section-label" data-t="section_body">VÜCUTTAKİ</div>
+
+        <!-- DEFAULT positions -->
+        <div class="section-label section-label-user">
+          <span data-t="section_defaults">VARSAYILAN</span>
+        </div>
+        <div class="actions actions-grid" id="default-list"></div>
+
+        <!-- USER positions -->
+        <div class="section-label section-label-user">
+          <span data-t="section_user">KAYDEDİLEN</span>
+          <span class="hint" id="user-count">0</span>
+        </div>
+        <div class="actions" id="user-list">
+          <div class="empty-hint" id="user-empty" data-t-html="no_user_positions">
+            Henüz kayıtlı pozisyonun yok. <strong>3D Gizmo</strong> ile yeni oluştur.
+          </div>
+        </div>
+
+        <div class="ruler"></div>
+
+        <!-- VEHICLE section -->
+        <div class="section-label" data-t="section_vehicle">ARAÇTAKİ</div>
+        <div class="actions actions-grid" id="vehicle-bone-list"></div>
+
+        <div class="row-action">
+          <button class="cta" data-action="open-gizmo">
+            <span>+ <span data-t="action_gizmo">3D Gizmo</span></span>
+          </button>
+        </div>
+
+        <div class="ruler ruler-bottom"></div>
+        <footer class="foot">
+          <span><span class="kbd kbd-foot">ESC</span> <span data-t="action_back">GERİ</span></span>
+          <span class="ver" id="positions-toy-label">TURBO TOYS</span>
+        </footer>
+      </section>
+
+      <!-- ====================== SCALE ====================== -->
+      <section class="screen hidden" data-screen="scale">
+        <header class="title-block">
+          <h1 class="title title-sm" data-t="scale_title">BOYUT</h1>
+        </header>
+
+        <div class="ruler"></div>
+
+        <!-- Big readout -->
+        <div class="scale-readout">
+          <div class="scale-value-wrap">
+            <span class="scale-value" id="scale-value">1.00</span>
+            <span class="scale-unit">×</span>
+          </div>
+          <div class="scale-meta">
+            <span data-t="scale_current">MEVCUT</span>
+            <span class="scale-divider">·</span>
+            <span data-t="scale_default">VARSAYILAN</span>
+            <span class="scale-default-num" id="scale-default-num">1.00×</span>
+          </div>
+        </div>
+
+        <!-- Slider -->
+        <div class="scale-slider-wrap">
+          <div class="scale-slider-track">
+            <div class="scale-slider-fill" id="scale-slider-fill"></div>
+            <div class="scale-slider-marker" id="scale-slider-default" title="default"></div>
+            <input
+              type="range"
+              id="scale-slider"
+              class="scale-slider-input"
+              min="0.30" max="2.50" step="0.05" value="1.00"
+            />
+          </div>
+          <div class="scale-slider-labels">
+            <span id="scale-min-label">0.30×</span>
+            <span id="scale-max-label">2.50×</span>
+          </div>
+        </div>
+
+        <!-- Quick step buttons -->
+        <div class="scale-buttons">
+          <button class="scale-btn scale-btn-big" data-scale-step="-0.10"><span data-t="scale_minus_big">−10%</span></button>
+          <button class="scale-btn" data-scale-step="-0.05"><span data-t="scale_minus_small">−5%</span></button>
+          <button class="scale-btn" data-scale-step="0.05"><span data-t="scale_plus_small">+5%</span></button>
+          <button class="scale-btn scale-btn-big" data-scale-step="0.10"><span data-t="scale_plus_big">+10%</span></button>
+        </div>
+
+        <div class="scale-hint" data-t="scale_hint">Sürükle veya butonlarla ayarla</div>
+
+        <div class="row-action">
+          <button class="cta cta-reset" data-action="reset-scale">
+            <span>⟲ <span data-t="scale_reset">SIFIRLA</span></span>
+          </button>
+        </div>
+
+        <div class="ruler ruler-bottom"></div>
+        <footer class="foot">
+          <span><span class="kbd kbd-foot">ESC</span> <span data-t="action_back">GERİ</span></span>
+          <span class="ver" id="scale-toy-label">TURBO TOYS</span>
+        </footer>
+      </section>
+
+      <!-- ====================== CUSTOM CONFIRM MODAL ====================== -->
+      <div id="confirm-modal" class="confirm-overlay hidden">
+        <div class="confirm-box">
+          <div class="confirm-icon">!</div>
+          <div class="confirm-title" data-t="confirm_title" id="confirm-title">Emin misin?</div>
+          <div class="confirm-text" id="confirm-text"></div>
+          <div class="confirm-actions">
+            <button class="confirm-btn confirm-cancel" id="confirm-cancel" data-t="confirm_cancel">İptal</button>
+            <button class="confirm-btn confirm-ok" id="confirm-ok" data-t="confirm_delete">Sil</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================== SAVE DIALOG MODAL (gizmo) ====================== -->
+      <div id="save-dialog" class="confirm-overlay hidden">
+        <div class="confirm-box save-box">
+          <div class="confirm-title" data-t="save_title" id="save-title">POZİSYON KAYDET</div>
+
+          <div class="save-field">
+            <label class="save-label" data-t="save_name_label" for="save-name-input">İSİM</label>
+            <input id="save-name-input" class="save-input" type="text" maxlength="64" autocomplete="off" spellcheck="false" />
+          </div>
+
+          <label class="save-check-row" for="save-default-check">
+            <input id="save-default-check" type="checkbox" checked />
+            <span class="save-check-box"><span class="save-check-mark">✓</span></span>
+            <span class="save-check-text" data-t="save_make_default">Bu oyuncak için varsayılan yap</span>
+          </label>
+
+          <div class="confirm-actions">
+            <button class="confirm-btn confirm-cancel" id="save-cancel" data-t="save_cancel">İPTAL</button>
+            <button class="confirm-btn confirm-save" id="save-ok" data-t="save_save">KAYDET</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================== GIZMO HUD OVERLAY ====================== -->
+    <div id="gizmo-hud" class="gizmo-hud hidden">
+      <div class="gizmo-info">
+        <div class="gizmo-title">
+          <span class="gizmo-badge" data-t="gizmo_badge">3D GIZMO</span>
+          <span class="gizmo-toy" id="gz-toy">—</span>
+        </div>
+        <div class="gizmo-rows">
+          <div class="gizmo-row">
+            <span class="lbl" data-t="gizmo_lbl_mode">MOD</span>
+            <span class="val" id="gz-mode">KONUM</span>
+          </div>
+          <div class="gizmo-row">
+            <span class="lbl" data-t="gizmo_lbl_bone">BONE</span>
+            <span class="val" id="gz-bone">—</span>
+          </div>
+          <div class="gizmo-row coords">
+            <span class="lbl" data-t="gizmo_lbl_pos">POS</span>
+            <span class="val" id="gz-pos">0.000  0.000  0.000</span>
+          </div>
+          <div class="gizmo-row coords">
+            <span class="lbl" data-t="gizmo_lbl_rot">ROT</span>
+            <span class="val" id="gz-rot">0.0  0.0  0.0</span>
+          </div>
+          <div class="gizmo-row">
+            <span class="lbl"></span>
+            <span class="val" style="font-size:10.5px; color:rgba(160,165,180,.80);">
+              <span class="kbd">B</span> / <span class="kbd">N</span> <span data-t="gizmo_bone_change">bone değiştir</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab'lar -->
+      <div class="gizmo-tabs">
+        <div class="gizmo-tab" id="gz-tab-translate">
+          <span class="kbd">G</span>
+          <span data-t="gizmo_mode_translate">KONUM</span>
+        </div>
+        <div class="gizmo-tab" id="gz-tab-rotate">
+          <span class="kbd">R</span>
+          <span data-t="gizmo_mode_rotate">YÖN</span>
+        </div>
+      </div>
+
+      <!-- Drag göstergesi -->
+      <div id="gz-drag" class="gizmo-drag hidden">
+        <span id="gz-drag-action">TAŞIYORUM</span>
+        <span class="axis" id="gz-drag-axis">X</span>
+      </div>
+
+      <!-- Footer kontrolleri -->
+      <div class="gizmo-footer">
+        <div class="chunk">
+          <span class="kbd">Sol</span>
+          <span data-t="gizmo_hint_left">çek = axis</span>
+        </div>
+        <div class="chunk">
+          <span class="kbd">Sağ</span>
+          <span data-t="gizmo_hint_right">çek = kamera</span>
+        </div>
+        <div class="chunk">
+          <span class="kbd">Wheel</span>
+          <span data-t="gizmo_hint_wheel">zoom</span>
+        </div>
+        <div class="chunk save">
+          <span class="kbd">ENTER</span>
+          <span data-t="gizmo_hint_save">KAYDET</span>
+        </div>
+        <div class="chunk cancel">
+          <span class="kbd">ESC</span>
+          <span data-t="gizmo_hint_cancel">iptal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- ====================== CLAW MACHINE PROMPT ====================== -->
+    <!-- Sag tarafta, oyuncu makineye yaklasinca beliren custom UI -->
+    <div id="claw-prompt" class="claw-prompt hidden">
+      <div class="claw-prompt-key">
+        <span class="claw-prompt-key-letter" id="claw-prompt-key-letter">E</span>
+      </div>
+      <div class="claw-prompt-body">
+        <div class="claw-prompt-title" id="claw-prompt-title">VİNÇLİ OYUNCAK</div>
+        <div class="claw-prompt-sub" id="claw-prompt-sub">BAŞLATMAK İÇİN BAS</div>
+      </div>
+    </div>
+
+    <!-- CUSTOM NOTIFY STACK (sag ust kose) -->
+    <div id="tt-notify-stack" class="tt-notify-stack"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

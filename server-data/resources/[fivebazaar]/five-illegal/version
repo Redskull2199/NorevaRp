@@ -1,0 +1,4 @@
+{
+    "version": "v1.4",
+    "message": "- Bugs in ox_target fixed, - Added random location setting for props to turn on and off, - added extra z coordinate setting for props."
+}

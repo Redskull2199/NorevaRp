@@ -1,0 +1,26 @@
+{
+    "Web": {
+        "type_a_message": "Bir mesaj yaz...",
+        "chat_settings": "Sohbet Ayarları",
+        "chat_settings_description": "Sohbet panelini özelleştir",
+        "chat_theme": "Sohbet Teması",
+        "chat_theme_description": "Sohbet temasını başka bir tasarımla değiştir",
+        "main_color": "Ana Renk",
+        "main_color_description": "Sohbetin ana rengini değiştir",
+        "position": "Konum",
+        "position_description": "Sohbetin konumunu değiştir",
+        "size": "Boyut",
+        "size_description": "Sohbet boyutunu değiştir",
+        "small": "Küçük",
+        "medium": "Orta",
+        "large": "Büyük",
+        "command_list": "Komut Listesi",
+        "save_changes": "Değişiklikleri Kaydet",
+        "close": "Kapat",
+        "res_chat": "Sohbeti Yenile",
+        "suggestion": "Öneri",
+        "music": "MÜZİK",
+        "now_playing": "Şimdi Çalıyor"
+    },
+    "Lua": {}
+}

@@ -1,0 +1,26 @@
+{
+    "Web": {
+        "type_a_message": "Type a message...",
+        "chat_settings": "Chat Settings",
+        "chat_settings_description": "Customize chat panel",
+        "chat_theme": "Chat Theme",
+        "chat_theme_description": "Change chat theme to other design",
+        "main_color": "Main Color",
+        "main_color_description": "Change the main color of the chat",
+        "position": "Position",
+        "position_description": "Change the position of the chat",
+        "size": "Size",
+        "size_description": "Change the size of the chat",
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large",
+        "command_list": "Command List",
+        "save_changes": "Save Changes",
+        "close": "Close",
+        "res_chat": "Res Chat",
+        "suggestion": "Suggestion",
+        "music": "MUSIC",
+        "now_playing": "Now Playing"
+    },
+    "Lua": {}
+}

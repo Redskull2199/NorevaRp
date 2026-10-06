@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ES Freecam</title>
+    <style>html,body{background:transparent!important;background-color:transparent!important;}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="cinematic-overlay" aria-hidden="true">
+        <div class="cinematic-bar cinematic-bar-top"></div>
+        <div class="cinematic-bar cinematic-bar-bottom"></div>
+    </div>
+
+    <div id="compose-grid" class="hidden">
+        <div class="grid-line v1"></div><div class="grid-line v2"></div>
+        <div class="grid-line h1"></div><div class="grid-line h2"></div>
+    </div>
+
+    <div id="hud-info" class="hidden">
+        <div class="hud-chip" id="hud-fov">FOV 45</div>
+        <div class="hud-chip" id="hud-filter">NORMAL</div>
+        <div class="hud-chip hidden" id="hud-boost">BOOST</div>
+    </div>
+
+    <aside id="help-menu" class="panel hidden">
+        <header class="panel-header">
+            <div class="brand-block">
+                <div class="brand-row">
+                    <img class="brand-logo" src="logo.png" alt="ES"/>
+                    <p class="brand-mark" id="menu-title" data-i18n="title">ES Freecam</p>
+                </div>
+                <p class="brand-sub" id="menu-subtitle" data-i18n="subtitle">Sinematik kamera stüdyosu</p>
+            </div>
+            <button type="button" class="icon-btn" id="close-panel" data-i18n-title="close" title="Kapat">✕</button>
+        </header>
+
+        <nav class="rail">
+            <button class="rail-btn active" data-tab="controls" data-i18n="tab_controls">Kontrol</button>
+            <button class="rail-btn" data-tab="filters" data-i18n="tab_filters">Filtre</button>
+            <button class="rail-btn" data-tab="positions" data-i18n="tab_positions">Kayıt</button>
+            <button class="rail-btn" data-tab="cinematic" data-i18n="tab_cinematic">Sinema</button>
+            <button class="rail-btn" data-tab="tools" data-i18n="tab_tools">Araç</button>
+            <button class="rail-btn" data-tab="settings" data-i18n="tab_settings">Tema</button>
+        </nav>
+
+        <div class="panel-body">
+            <section class="tab-pane active" id="controls-tab">
+                <h2 class="section-title" data-i18n="section_controls">Kontroller</h2>
+                <p class="section-copy" data-i18n="section_controls_copy">Freecam açıkken geçerli kısayollar</p>
+                <div class="control-list" id="controls-container"></div>
+            </section>
+
+            <section class="tab-pane" id="filters-tab">
+                <h2 class="section-title" data-i18n="section_filters">Filtreler</h2>
+                <p class="section-copy" data-i18n="section_filters_copy">Oturumluk — kapanınca sıfırlanır</p>
+                <div class="strength-row">
+                    <label><span data-i18n="strength">Yoğunluk</span> <span id="filter-strength-value">1.00</span></label>
+                    <input class="range-input" id="filter-strength" type="range" min="0.05" max="1" step="0.01" value="1"/>
+                </div>
+                <div class="filter-grid" id="filters-container"></div>
+            </section>
+
+            <section class="tab-pane" id="positions-tab">
+                <div class="section-head">
+                    <div>
+                        <h2 class="section-title" data-i18n="section_positions">Kayıtlar</h2>
+                        <p class="section-copy" data-i18n="section_positions_copy">Citizenid’ne özel · kamera + filtre + emote</p>
+                    </div>
+                    <button class="accent-btn" id="save-position" data-i18n="save">Kaydet</button>
+                </div>
+                <div class="saved-positions" id="positions-container"></div>
+            </section>
+
+            <section class="tab-pane" id="cinematic-tab">
+                <h2 class="section-title" data-i18n="section_cinematic">Sinematik</h2>
+                <p class="section-copy" data-i18n="section_cinematic_copy">Letterbox — sadece bu oturum</p>
+                <div class="toggle-row">
+                    <span data-i18n="letterbox">Letterbox</span>
+                    <label class="switch">
+                        <input type="checkbox" id="cinematic-enabled"/>
+                        <span class="slider-switch"></span>
+                    </label>
+                </div>
+                <div class="strength-row">
+                    <label><span data-i18n="thickness">Kalınlık</span> <span id="letterbox-value">0.12</span></label>
+                    <input class="range-input" id="letterbox-slider" type="range" min="0.04" max="0.25" step="0.01" value="0.12"/>
+                </div>
+            </section>
+
+            <section class="tab-pane" id="tools-tab">
+                <h2 class="section-title" data-i18n="section_tools">Araçlar</h2>
+                <p class="section-copy" data-i18n="section_tools_copy">Kompozisyon ve hareket yardımcıları</p>
+                <div class="toggle-row">
+                    <span data-i18n="opt_grid">Rule of thirds grid</span>
+                    <label class="switch"><input type="checkbox" id="opt-grid"/><span class="slider-switch"></span></label>
+                </div>
+                <div class="toggle-row">
+                    <span data-i18n="opt_hud">HUD bilgi</span>
+                    <label class="switch"><input type="checkbox" id="opt-hud" checked/><span class="slider-switch"></span></label>
+                </div>
+                <div class="toggle-row">
+                    <span data-i18n="opt_lookat">Karaktere bak (look-at)</span>
+                    <label class="switch"><input type="checkbox" id="opt-lookat"/><span class="slider-switch"></span></label>
+                </div>
+                <div class="toggle-row">
+                    <span data-i18n="opt_smooth">Yumuşak kamera</span>
+                    <label class="switch"><input type="checkbox" id="opt-smooth" checked/><span class="slider-switch"></span></label>
+                </div>
+            </section>
+
+            <section class="tab-pane" id="settings-tab">
+                <h2 class="section-title" data-i18n="section_theme">Tema</h2>
+                <p class="section-copy" data-i18n="section_theme_copy">Sadece arayüz teması kalıcıdır</p>
+                <div class="theme-picks" id="theme-picks">
+                    <button type="button" class="theme-swatch" data-theme="midnight"><span>Midnight</span></button>
+                    <button type="button" class="theme-swatch" data-theme="slate"><span>Slate</span></button>
+                    <button type="button" class="theme-swatch" data-theme="amber"><span>Amber</span></button>
+                    <button type="button" class="theme-swatch" data-theme="mono"><span>Mono</span></button>
+                </div>
+            </section>
+        </div>
+    </aside>
+
+    <div class="modal hidden" id="save-position-modal">
+        <div class="modal-card">
+            <h3 data-i18n="save_modal_title">Pozisyon kaydet</h3>
+            <input id="position-name" data-i18n-placeholder="save_modal_placeholder" placeholder="Örn. close-up sol" type="text" maxlength="40"/>
+            <div class="modal-actions">
+                <button class="accent-btn" id="save-position-confirm" data-i18n="save">Kaydet</button>
+                <button class="ghost-btn" id="save-position-cancel" data-i18n="cancel">İptal</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal hidden" id="delete-confirm-modal">
+        <div class="modal-card">
+            <h3 data-i18n="delete_modal_title">Kaydı sil</h3>
+            <p class="modal-message" data-i18n="delete_modal_message">Bu pozisyon kalıcı olarak silinecek.</p>
+            <div class="modal-actions">
+                <button class="danger-btn" id="delete-confirm" data-i18n="delete">Sil</button>
+                <button class="ghost-btn" id="delete-cancel" data-i18n="cancel">İptal</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

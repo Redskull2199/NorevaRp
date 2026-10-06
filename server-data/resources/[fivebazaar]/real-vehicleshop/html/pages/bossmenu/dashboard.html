@@ -1,0 +1,165 @@
+<div class="w-full h-full flex flex-col">
+    <div class="w-full h-[11.7%] flex item-center justify-between">
+        <div class="w-[24.3%] h-full bg-[#000000BF] rounded-[.2604vw] relative" style="background-image: url('./img/bossmenu/dashboard/stats-bg.png'); background-size: cover; background-repeat: no-repeat;">
+            <img src="./img/bossmenu/dashboard/employees-img.png" class="w-[6.7188vw] h-[3.4854vw] right-[.5vw] bottom-0 absolute">
+            <div class="w-[62%] h-full flex flex-col items-center justify-start left-[.8vw] top-0 absolute">
+                <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.5vw] absolute">{{ $root.Language['number_of_employeer'] }}</span>
+                <div class="w-full bottom-[.8vw] absolute">
+                    <span class="text-cyan-400 text-[.6771vw] font-semibold font-['Poppins'] mr-[.2vw]">{{ $root.EmployeesTable.length }}</span>
+                    <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['employee'] }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="w-[24.3%] h-full bg-[#000000BF] rounded-[.2604vw] relative" style="background-image: url('./img/bossmenu/dashboard/stats-bg.png'); background-size: cover; background-repeat: no-repeat;">
+            <img src="./img/bossmenu/dashboard/firstcar-img.png" class="w-[10.5729vw] h-[3.4954vw] right-0 bottom-0 absolute">
+            <div class="w-[62%] h-full flex flex-col items-center justify-start left-[.8vw] top-0 absolute">
+                <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.5vw] absolute">{{ $root.Language['vehicles_in_stock'] }}</span>
+                <div class="w-full bottom-[.8vw] absolute">
+                    <span class="text-cyan-400 text-[.6771vw] font-semibold font-['Poppins'] mr-[.2vw]">{{ $root.AvailableVehiclesCount }}</span>
+                    <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['vehicle'] }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="w-[24.3%] h-full bg-[#000000BF] rounded-[.2604vw] relative" style="background-image: url('./img/bossmenu/dashboard/stats-bg.png'); background-size: cover; background-repeat: no-repeat;">
+            <img src="./img/bossmenu/dashboard/secondcar-img.png" class="w-[10.5729vw] h-[3.4854vw] right-0 bottom-0 absolute">
+            <div class="w-[62%] h-full flex flex-col items-center justify-start left-[.8vw] top-0 absolute">
+                <span class="w-full text-stone-300 text-[.8vw] font-semibold font-['Poppins'] top-[.5vw] absolute">{{ $root.Language['vehicles_sold'] }}</span>
+                <div class="w-full bottom-[.8vw] absolute">
+                    <span class="text-cyan-400 text-[.6771vw] font-semibold font-['Poppins'] mr-[.2vw]">{{ $root.SoldVehiclesLog.length }}</span>
+                    <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['vehicle'] }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="w-[24.3%] h-full bg-[#000000BF] rounded-[.2604vw] relative" style="background-image: url('./img/bossmenu/dashboard/stats-bg.png'); background-size: cover; background-repeat: no-repeat;">
+            <img src="./img/bossmenu/dashboard/star.png" class="w-[9.7396vw] h-[3.4854vw] right-[.1vw] bottom-0 absolute">
+            <div class="w-[62%] h-full flex flex-col items-center justify-start left-[.8vw] top-0 absolute">
+                <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.5vw] absolute">{{ $root.Language['company_rating'] }}</span>
+                <div class="w-full bottom-[.8vw] absolute">
+                    <span class="text-cyan-400 text-[.6771vw] font-semibold font-['Poppins'] mr-[.2vw]" :class="{ 'text-[#FF0004]': $root.AverageRating < 3 && $root.AverageRating > 0 }">{{ $root.AverageRating }}</span>
+                    <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins'] mr-[.2vw]">{{ $root.Language['average'] }}</span>
+                    <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']" v-if=" $root.AverageRating > 0">({{ $root.AverageRating < 3 ? $root.Language['bad'] : $root.Language['good'] }})</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-full h-[4.3%]"></div>
+    <div class="w-full h-[85%] flex items-center justify-between">
+        <div class="w-[49.5%] h-full flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+            <div class="w-full h-[14.4%] bg-[#000000BF] relative">
+                <img src="./img/bossmenu/dashboard/question-mark.png" class="w-[13.3333vw] h-[3.63vw] right-0 bottom-0 absolute">
+                <div class="w-[73%] h-full flex flex-col items-start justify-center left-[1.5%] top-0 absolute">
+                    <span class="w-full text-[#C3C3C3] text-[.8333vw] font-semibold font-['Poppins']">{{ $root.Language['preorder'] }}</span>
+                    <span class="w-full text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['preorder_description'] }}</span>
+                </div>
+            </div>
+            <div class="w-full h-[1.6%]"></div>
+            <div class="w-full h-[84%] flex flex-col">
+                <div class="w-full h-[88%] flex flex-col flex items-center justify-start">
+                    <div v-if="$root.PreordersPage.length > 0" v-for="(v, k) in $root.PreordersPage" class="w-[98.5%] h-[12%] flex flex-wrap items-center bg-[#000000DE] rounded-[.1563vw] mt-[.3vw] mb-[.1vw]">
+                        <div class="w-[21.8%] h-full flex flex-col items-center justify-center">
+                            <span class="w-full text-white text-[.7vw] text-center font-medium font-['Poppins'] mt-[.25vw]">{{ $root.Language['ordered_by'] }}</span>
+                            <span class="w-full text-neutral-400 text-[.5208vw] text-center font-semibold font-['Poppins'] mb-[.25vw]">{{ v.requestor }}</span>
+                        </div>
+                        <div class="w-[.2%] h-[38.5%] bg-[#636363]"></div>
+                        <div class="w-[26.8%] h-full flex flex-col items-center justify-center">
+                            <span class="w-full text-white text-[.7vw] text-center font-medium font-['Poppins'] mt-[.25vw]">{{ $root.Language['ordered_model'] }}</span>
+                            <span class="w-full text-neutral-400 text-[.5208vw] text-center font-semibold font-['Poppins'] mb-[.25vw]">{{ v.vehiclemodel }}</span>
+                        </div>
+                        <div class="w-[.2%] h-[38.5%] bg-[#636363]"></div>
+                        <div class="w-[21.3%] h-full flex flex-col items-center justify-center">
+                            <span class="w-full text-white text-[.7vw] text-center font-medium font-['Poppins'] mt-[.25vw]">{{ $root.Language['price'] }}</span>
+                            <div class="w-full flex items-start justify-center mb-[.25vw]">
+                                <span class="text-cyan-400 text-[.5208vw] text-center font-semibold font-['Poppins']">$</span>
+                                <span class="text-neutral-400 text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.FormatMoney(v.price) }}</span>
+                            </div>
+                        </div>
+                        <div class="w-[.2%] h-[38.5%] bg-[#636363]"></div>
+                        <div class="w-[29.5%] h-full flex items-center justify-center">
+                            <div class="w-[4.4792vw] h-[1.1458vw] flex items-center justify-center bg-[#5E5E5E] rounded-[.1042vw] cursor-pointer mr-[.125vw]" @click="$root.DeclinePreorder(v.requestor, v.vehiclemodel, v.price)">
+                                <span class="w-full text-white text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.Language['decline'] }}</span>
+                            </div>
+                            <div class="w-[4.4792vw] h-[1.1458vw] flex items-center justify-center bg-[#00F0FF] rounded-[.1042vw] cursor-pointer ml-[.125vw]" @click="$root.AcceptPreorder(v.requestor, v.vehiclemodel, v.price)">
+                                <span class="w-full text-black text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.Language['accept'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else class="w-[98.5%] h-[14%] flex items-center justify-center mt-[.3vw]">
+                        <span class="w-full text-zinc-600 text-[1vw] text-center font-semibold font-['Poppins']">{{ $root.Language['no_data'] }}</span>
+                    </div>
+                </div>
+                <div class="w-full h-[12%] relative">
+                    <div class="w-[13%] h-full flex items-center justify-between right-[.8vw] top-0 absolute" v-if="$root.PreordersPage.length > 0">
+                        <div class="w-[47%] h-[80%] flex items-center justify-center bg-[#000000] cursor-pointer" :class="{ 'cursor-not-allowed': $root.BossmenuPageSettings.PreorderPage == 1 }" @click="$root.PrevPage('preorder')">
+                            <inlinesvg class="h-[.8vw] h-[.8vw] flex items-center justify-center" src="./img/svg/left.svg"></inlinesvg>
+                        </div>
+                        <div class="w-[47%] h-[80%] flex items-center justify-center bg-[#000000] cursor-pointer" :class="{ 'cursor-not-allowed': $root.BossmenuPageSettings.PreorderPage == $root.TotalBossmenuPages('preorder') }" @click="$root.NextPage('preorder')">
+                            <inlinesvg class="h-[.8vw] h-[.8vw] flex items-center justify-center" src="./img/svg/right.svg"></inlinesvg>
+                        </div>
+                    </div>
+                    <div class="w-[79%] h-full flex items-center justify-start left-[.6vw] top-0 absolute" v-if="$root.PreordersPage.length > 0">
+                        <div class="w-full text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['preorder_second_description'] }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-[49.5%] h-full flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+            <div class="w-full h-[14.4%] bg-[#000000BF] relative">
+                <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-[3.63vw] right-0 bottom-0 absolute">
+                <div class="w-[73%] h-full flex flex-col items-start justify-center left-[1.5%] top-0 absolute">
+                    <span class="w-full text-[#C3C3C3] text-[.8333vw] font-semibold font-['Poppins']">{{ $root.Language['sold_vehicles'] }}</span>
+                    <span class="w-full text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['sold_vehicles_description'] }}</span>
+                </div>
+            </div>
+            <div class="w-full h-[1.6%]"></div>
+            <div class="w-full h-[84%] flex flex-col">
+                <div class="w-full h-[88%] flex flex-col flex items-center justify-start">
+                    <div v-if="$root.SoldVehiclesPage.length > 0" v-for="(v, k) in $root.SoldVehiclesPage" class="w-[98.5%] h-[12%] flex flex-wrap flex items-center bg-[#000000DE] rounded-[.1563vw] mt-[.3vw] mb-[.1vw]">
+                        <div class="w-[21.8%] h-full flex flex-col items-center justify-center">
+                            <span class="w-full text-white text-[.7vw] text-center font-medium font-['Poppins'] mt-[.25vw]">{{ $root.Language['buyer'] }}</span>
+                            <span class="w-full text-neutral-400 text-[.5208vw] text-center font-semibold font-['Poppins'] mb-[.3vw]">{{ v.buyer }}</span>
+                        </div>
+                        <div class="w-[.2%] h-[38.5%] bg-[#636363]"></div>
+                        <div class="w-[26.8%] h-full flex flex-col items-center justify-center">
+                            <span class="w-full text-white text-[.7vw] text-center font-medium font-['Poppins'] mt-[.25vw]">{{ $root.Language['purchased_model'] }}</span>
+                            <span class="w-full text-neutral-400 text-[.5208vw] text-center font-semibold font-['Poppins'] mb-[.3vw]">{{ v.vehicle }}</span>
+                        </div>
+                        <div class="w-[.2%] h-[38.5%] bg-[#636363]"></div>
+                        <div class="w-[21.3%] h-full flex flex-col items-center justify-center">
+                            <span class="w-full text-white text-[.7vw] text-center font-medium font-['Poppins'] mt-[.25vw]">{{ $root.Language['price'] }}</span>
+                            <div class="w-full flex items-start justify-center mb-[.3vw]">
+                                <span class="text-cyan-400 text-[.5208vw] text-center font-semibold font-['Poppins']">$</span>
+                                <span class="text-neutral-400 text-[.5208vw] text-center font-semibold font-['Poppins']">{{ $root.FormatMoney(v.price) }}</span>
+                            </div>
+                        </div>
+                        <div class="w-[.2%] h-[38.5%] bg-[#636363]"></div>
+                        <div class="w-[29.5%] h-full flex flex-col items-center justify-center">
+                            <span class="w-full text-white text-[.7vw] text-center font-medium font-['Poppins'] mt-[.25vw]">{{ $root.Language['date'] }}</span>
+                            <div class="w-full text-cyan-400 text-[.5208vw] text-center font-semibold font-['Poppins'] mb-[.3vw]">{{ v.date }}</div>
+                        </div>
+                    </div>
+                    <div v-else class="w-[98.5%] h-[14%] flex items-center justify-center mt-[.3vw]">
+                        <span class="w-full text-zinc-600 text-[1vw] text-center font-semibold font-['Poppins']">{{ $root.Language['no_data'] }}</span>
+                    </div>
+                </div>
+                <div class="w-full h-[12%] relative">
+                    <div class="w-[13%] h-full flex items-center justify-between right-[.8vw] top-0 absolute" v-if="$root.SoldVehiclesPage.length > 0">
+                        <div class="w-[47%] h-[80%] flex items-center justify-center bg-[#000000] cursor-pointer" :class="{ 'cursor-not-allowed': $root.BossmenuPageSettings.SoldVehiclesPage == 1 }" @click="$root.PrevPage('soldvehicles')">
+                            <inlinesvg class="h-[.8vw] h-[.8vw] flex items-center justify-center" src="./img/svg/left.svg"></inlinesvg>
+                        </div>
+                        <div class="w-[47%] h-[80%] flex items-center justify-center bg-[#000000] cursor-pointer" :class="{ 'cursor-not-allowed': $root.BossmenuPageSettings.SoldVehiclesPage == $root.TotalBossmenuPages('soldvehicles') }" @click="$root.NextPage('soldvehicles')">
+                            <inlinesvg class="h-[.8vw] h-[.8vw] flex items-center justify-center" src="./img/svg/right.svg"></inlinesvg>
+                        </div>
+                    </div>
+                    <div class="w-[79%] h-full flex items-center justify-start left-[.3vw] top-0 absolute">
+                        <div class="w-[65%] h-[75%] bg-[#5555554D] flex flex-wrap rounded-[.2vw] left-0 absolute">
+                            <input type="text" class="w-[87%] h-full px-[.3vw] outline-none bossmenu-classic-search-input" :placeholder="$root.Language['bossmenu_search_input']" v-model="$root.Inputs.SoldVehiclesInput">
+                            <div class="w-[13%] h-full flex items-center justify-center">
+                                <inlinesvg class="w-[.9375vw] h-[.9375vw] flex item-center justify-center" src="./img/bossmenu/search.svg"></inlinesvg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+Locales['it'] = {
+    ['opencarplay'] = 'Apri Carplay',
+    ['nocarplay'] = 'Non hai un oggetto Carplay!',
+    ['notincar'] = 'Non sei in un`auto!',
+    ['already_installed'] = 'Questa auto ha già Carplay installato!',
+    ['installed'] = 'Carplay è stato installato!',
+    ['notinstalled'] = 'Questa auto non ha Carplay installato!',
+    ['notmechanic'] = 'Non sei un meccanico, solo i meccanici possono installare Carplay!',
+    ['damaged'] = 'Questa auto è danneggiata, non puoi usare Carplay!',
+    ['notdriver'] = 'Non sei il conducente, non puoi usare Carplay!',
+    ['autopilot_no_waypoint'] = 'Nessun punto di riferimento impostato',
+    ['autopilot_reached_destionation'] = 'Siamo arrivati al nostro punto di riferimento.',
+    ['progress_bar_text'] = 'Installazione di Carplay in corso...',
+    ['go_inside'] = "You need to go into a Vehicle to install Carplay",
+    ['autopilot_disengaged'] = "Autopilot disengaged, you have control.",
+    ['go_outside'] = "Devi uscire dal veicolo per installare Carplay",
+    ['removed'] = "Carplay e stato rimosso!",
+}

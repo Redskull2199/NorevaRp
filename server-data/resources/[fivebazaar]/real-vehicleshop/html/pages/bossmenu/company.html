@@ -1,0 +1,159 @@
+<div class="w-full h-full flex flex-wrap item-center justify-between">
+    <div class="w-[49.5%] h-[98%] flex flex-col">
+        <div class="w-full h-[33%] flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+            <div class="w-full h-[38.5%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                    <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.775vw] absolute">{{ $root.Language['company_balance'] }}</span>
+                    <div class="w-full bottom-[.6vw] absolute">
+                        <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['company_money_description'] }}</span>
+                    </div>
+                </div>
+                <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-full right-0 top-0 absolute">
+            </div>
+            <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                <div class="w-[98%] h-[86%] flex flex-wrap top-[.3vw] absolute">
+                    <div class="w-[70.5%] h-full flex flex-col">
+                        <div class="w-full h-[58%] flex items-center justify-center bg-[#00F0FF] mb-[1%]">
+                            <span class="w-full text-black text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['company_balance'] }}</span>
+                        </div>
+                        <div class="w-full h-[43.5%] flex items-center justify-center bg-[#000000DE]">
+                            <span class="text-cyan-300 text-[.7813vw] font-semibold font-['Poppins'] mr-[.3vw]">${{ $root.FormatMoney($root.CompanyMoney) }}</span>
+                            <span class="text-white text-[.7813vw] font-semibold font-['Poppins']">{{ $root.Language['available'] }}</span>
+                        </div>
+                    </div>
+                    <div class="w-[29.5%] h-full flex flex-col items-start">
+                        <div class="w-full h-[55.5%] flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="$root.PermCheck($root.PlayerRank, 'withdrawdeposit') && ($root.ShowBossPopup = 'deposit')">
+                            <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['deposit'] }}</span>
+                        </div>
+                        <div class="w-full h-[2.5%]"></div>
+                        <div class="w-[99%] h-[42%] flex items-center justify-center bg-[#000000DE] ml-[1%] cursor-pointer" @click="$root.PermCheck($root.PlayerRank, 'withdrawdeposit') && ($root.ShowBossPopup = 'withdraw')">
+                            <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['withdraw'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full h-[.7%]"></div>
+        <div class="w-full h-[33%] flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+            <div class="w-full h-[38.5%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                    <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.775vw] absolute">{{ $root.Language['profit'] }}</span>
+                    <div class="w-full bottom-[.6vw] absolute">
+                        <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['profit_description'] }}</span>
+                    </div>
+                </div>
+                <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-full right-0 top-0 absolute">
+            </div>
+            <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                <div class="w-[98.5%] h-[86%] flex flex-col left-[.3vw] top-[.25vw] absolute">
+                    <div class="w-full h-[55%] flex items-center justify-center bg-[#00F0FF]">
+                        <span class="w-full text-black text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['profit_information'] }}</span>
+                    </div>
+                    <div class="w-full h-[5%]"></div>
+                    <div class="w-full h-[40%] flex items-center bg-[#000000DE]">
+                        <div class="w-full flex items-center justify-center">
+                            <span class="text-cyan-300 text-[.7813vw] font-semibold font-['Poppins'] mr-[.3vw]">${{ $root.FormatMoney($root.TotalProfit) }}</span>
+                            <span class="text-white text-[.7813vw] font-semibold font-['Poppins']">{{ $root.Language['earned'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full h-[.7%]"></div>
+        <div class="w-full h-[33%] flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+            <div class="w-full h-[38.5%] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                    <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.775vw] absolute">{{ $root.Language['payout'] }}</span>
+                    <div class="w-full bottom-[.6vw] absolute">
+                        <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['payout_description'] }}</span>
+                    </div>
+                </div>
+                <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-full right-0 top-0 absolute">
+            </div>
+            <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                <div class="w-[98.5%] h-[86%] flex flex-col left-[.3vw] top-[.25vw] absolute">
+                    <div class="w-full h-[55%] flex items-center justify-center bg-[#00F0FF]">
+                        <span class="w-full text-black text-[.7813vw] text-center font-semibold font-['Poppins']">{{ $root.Language['payout_information'] }}</span>
+                    </div>
+                    <div class="w-full h-[5%]"></div>
+                    <div class="w-full h-[40%] flex items-center bg-[#000000DE]">
+                        <div class="w-full flex items-center justify-center">
+                            <span class="text-cyan-300 text-[.7813vw] font-semibold font-['Poppins'] mr-[.3vw]">${{ $root.FormatMoney($root.TotalPayout) }}</span>
+                            <span class="text-white text-[.7813vw] font-semibold font-['Poppins']">{{ $root.Language['was_spent'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-[49.5%] h-[98%] flex flex-col bg-[#000000BF] rounded-[.2604vw]">
+        <div class="w-full h-[12%] bg-[#000000BF] relative">
+            <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-full right-0 bottom-0 absolute">
+            <div class="w-[73%] h-full flex flex-col items-start justify-center left-[1.5%] top-0 absolute">
+                <span class="w-full text-[#C3C3C3] text-[.8333vw] font-semibold font-['Poppins'] mt-[.2vw]">{{ $root.Language['deposit_withdraw_transaction'] }}</span>
+                <span class="w-full text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ $root.Language['dwt_description'] }}</span>
+            </div>
+        </div>
+        <div class="w-full h-[1%]"></div>
+        <div class="w-full h-[74%] flex flex-col flex items-center justify-start">
+            <div v-if="$root.TransactionsPage.length > 0" v-for="(v, k) in $root.TransactionsPage" class="w-[99%] h-[10%] flex flex-wrap flex items-center bg-[#000000DE] rounded-[.1563vw] mt-[.3vw] mb-[.25vw]">
+                <div class="w-[21.5%] h-full flex flex-wrap justify-between">
+                    <div class="w-[27.5%] h-full flex items-center justify-center">
+                        <div class="w-[76%] h-[75%] border-[.0521vw] border-[#00F0FF] rounded-[50%]">
+                            <img :src="v.pfp" class="w-full h-full"> 
+                        </div>
+                    </div>
+                    <div class="w-[70%] h-full flex flex-col">
+                        <span class="w-full text-white text-[.7292vw] font-medium font-['Poppins'] mt-[.2vw]">{{ $root.Language['staff'] }}</span>
+                        <span class="w-full text-neutral-400 text-[.5208vw] font-semibold font-['Poppins'] mb-[.2vw]">{{ v.name }}</span>
+                    </div>
+                </div>
+                <div class="w-[.1%] h-[38%] bg-[#636363]"></div>
+                <div class="w-[27%] h-full flex flex-col items-center justify-center">
+                    <span class="w-full text-white text-[.7292vw] text-center font-medium font-['Poppins'] mt-[.3vw]">{{ $root.Language['rank'] }}</span>
+                    <span class="w-full text-neutral-400 text-[.5208vw] text-center font-semibold font-['Poppins'] mb-[.4vw]">{{ v.rank }}</span>
+                </div>
+                <div class="w-[.1%] h-[38%] bg-[#636363]"></div>
+                <div class="w-[21.7%] h-full flex flex-col items-center justify-center">
+                    <span class="w-full text-white text-[.7292vw] text-center font-medium font-['Poppins'] mt-[.3vw]">{{ $root.Language['amount'] }}</span>
+                    <div class="w-full flex item-center justify-center mb-[.4vw]">
+                        <span class="text-[.5208vw] font-semibold font-['Poppins']" :class="{ 'text-[#00F0FF]': v.type == 'deposit', 'text-red-600': v.type == 'withdraw' }">$</span>
+                        <span class="text-neutral-400 text-[.5208vw] font-semibold font-['Poppins'] mr-[.3vw]">{{ $root.FormatMoney(v.amount) }}</span>
+                        <span class="text-[#00F0FF] text-[.5208vw] font-semibold font-['Poppins']" v-if="v.type == 'deposit'">{{ $root.Language['deposited'] }}</span>
+                        <span class="text-red-600 text-[.5208vw] font-semibold font-['Poppins']" v-else>{{ $root.Language['withdrawn'] }}</span>
+                    </div>
+                </div>
+                <div class="w-[.1%] h-[38%] bg-[#636363]"></div>
+                <div class="w-[29.5%] h-full flex flex-col items-center justify-center">
+                    <span class="w-full text-white text-[.7292vw] text-center font-medium font-['Poppins'] mt-[.3vw]">{{ $root.Language['date'] }}</span>
+                    <span class="w-full text-neutral-400 text-[.5208vw] text-center font-semibold font-['Poppins'] mb-[.4vw]">{{ v.date }}</span>
+                </div>
+            </div>
+            <div v-else class="w-[98.5%] h-[14%] flex items-center justify-center mt-[.3vw]">
+                <span class="w-full text-zinc-600 text-[1vw] text-center font-semibold font-['Poppins']">{{ $root.Language['no_data'] }}</span>
+            </div>
+        </div>
+        <div class="w-full h-[3.7%]"></div>
+        <div class="w-full h-[6%] flex flex-wrap">
+            <div class="w-[1.2%] h-full"></div>
+            <div class="w-[97.6%] h-full flex items-center justify-between">
+                <div class="w-[54%] h-full flex bg-[#5555554D] rounded-[.1563vw] relative">
+                    <input type="text" class="w-[88%] h-full outline-none pl-[.5vw] bossmenu-classic-search-input left-0 absolute" :placeholder="$root.Language['bossmenu_search_input']" v-model="$root.Inputs.TransactionsInput">
+                    <div class="w-[12%] h-full flex items-center justify-center right-0 absolute">
+                        <inlinesvg class="w-[.9375vw] h-[.9375vw] flex item-center justify-center" src="./img/bossmenu/search.svg"></inlinesvg>
+                    </div>
+                </div>
+                <div class="w-[12%] h-full flex items-center justify-between" v-if="$root.TransactionsPage.length > 0">
+                    <div class="w-[42%] h-full flex items-center justify-center bg-[#000000] rounded-[.1563vw] cursor-pointer" :class="{ 'cursor-not-allowed': $root.BossmenuPageSettings.TransactionsPage == 1 }" @click="$root.PrevPage('transaction')">
+                        <inlinesvg class="h-[.6vw] h-[.6vw] flex items-center justify-center" src="./img/svg/left.svg"></inlinesvg>
+                    </div>
+                    <div class="w-[42%] h-full flex items-center justify-center bg-[#000000] rounded-[.1563vw] cursor-pointer" :class="{ 'cursor-not-allowed': $root.BossmenuPageSettings.TransactionsPage == $root.TotalBossmenuPages('transaction') }" @click="$root.NextPage('transaction')">
+                        <inlinesvg class="h-[.6vw] h-[.6vw] flex items-center justify-center" src="./img/svg/right.svg"></inlinesvg>
+                    </div>
+                </div>
+            </div>
+            <div class="w-[1.2%] h-full"></div>
+        </div>
+        <div class="w-full h-[3.3%]"></div>
+    </div>
+</div>

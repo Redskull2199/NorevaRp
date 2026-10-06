@@ -1,0 +1,66 @@
+{
+    "sit_down": "[E] - Otur",
+    "reset_table": "Reset Table",
+    "seat_occupied": {
+        "main": "Seat Occupied",
+        "description": "This seat is already taken!"
+    },
+    "not_enough_players": {
+        "main": "Not Enough Players",
+        "description": "Insufficient players to start. Minimum 4 players required!"
+    },
+    "coming_soon": {
+        "main": "Coming Soon",
+        "description": "This feature is not yet supported, please wait for the update"
+    },
+    "throwPiece": {
+        "main": "Invalid Action",
+        "description": "You cannot perform this action while your hand is open!"
+    },
+    "approveHand": {
+        "main": "Approve Hand",
+        "description": "You cannot approve your own hand!"
+    },
+    "openHand": {
+        "main": "Open Hand",
+        "description": "Your hand is already open, waiting for other players to approve!",
+        "notEnoughPieces": "You must have 15 tiles to open your hand.",
+        "noGivePiece": "You must draw a tile first!",
+        "turn": "It's not your turn!"
+    },
+    "handRejected": {
+        "main": "Hand Rejected",
+        "description": "The opened hand was deemed invalid!"
+    },
+    "showOpenHand": {
+        "main": "Hand Opened",
+        "description": "%s has opened their hand!"
+    },
+    "finishGame": {
+        "main": "Game Over",
+        "won": "%s has won the game!",
+        "wonSelf": "You have won the game!"
+    },
+    "resetTable": {
+        "main": "Reset Table",
+        "player": "Players must leave the table to reset.",
+        "noGame": "No game found at this table."
+    },
+    "UI": {
+        "okey_menu": {
+            "create_table": "Create Table",
+            "title": "Okey Menu",
+            "description": "You are the table owner. Ready to start the game?"
+        },
+        "give_center_piece": "Draw Tile",
+        "throw_piece": "Discard Tile",
+        "give_piece": "Take Tile",
+        "open_hand": "Open Hand",
+        "approve_hand": "Approve Hand",
+        "reject_hand": "Reject Hand",
+        "turn": {
+            "your_turn": "Your Turn",
+            "waiting": "Waiting for Turn"
+        }
+    }
+}

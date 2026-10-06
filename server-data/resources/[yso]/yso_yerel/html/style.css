@@ -1,0 +1,341 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+    overflow: hidden;
+    background: transparent;
+}
+
+.tow-menu {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 185px;
+    background: linear-gradient(135deg, rgba(20, 35, 70, 0.95) 0%, rgba(15, 25, 55, 0.98) 100%);
+    border-radius: 12px;
+    border: 1.5px solid rgba(100, 165, 255, 0.35);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(100, 165, 255, 0.2) inset,
+        0 0 20px rgba(60, 130, 255, 0.15);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 1;
+}
+
+.tow-menu, .tow-menu * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.tow-menu::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 20%, rgba(96, 165, 250, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(147, 197, 253, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    animation: glowShift 8s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes glowShift {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-5%, 5%); }
+}
+
+.tow-menu.hidden {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-220px);
+    pointer-events: none;
+}
+
+.tow-header {
+    position: relative;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+}
+
+.scene {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+}
+
+.sky-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 42%;
+    background: linear-gradient(180deg, rgba(191, 219, 254, 0.5) 0%, rgba(219, 234, 254, 0.3) 60%, rgba(239, 246, 255, 0.15) 100%);
+}
+
+.road-surface {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 58%;
+    background: linear-gradient(180deg, rgba(100, 116, 139, 0.4) 0%, rgba(71, 85, 105, 0.5) 100%);
+}
+
+.road-lines {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 12px,
+        rgba(255, 255, 255, 0.25) 12px,
+        rgba(255, 255, 255, 0.25) 24px
+    );
+    animation: linesMove 0.6s linear infinite;
+    transform: translateY(-50%);
+}
+
+@keyframes linesMove {
+    0% { transform: translateY(-50%) translateX(0); }
+    100% { transform: translateY(-50%) translateX(-24px); }
+}
+
+.truck-wrap {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 38px;
+    z-index: 3;
+    animation: truckRide 0.55s ease-in-out infinite;
+}
+
+@keyframes truckRide {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-1px); }
+}
+
+.truck-svg-clean {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+}
+
+.dust-cloud {
+    position: absolute;
+    bottom: 3px;
+    left: 22px;
+    width: 45px;
+    height: 15px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.d-particle {
+    position: absolute;
+    bottom: 0;
+    width: 2px;
+    height: 2px;
+    background: rgba(148, 163, 184, 0.35);
+    border-radius: 50%;
+    display: block;
+}
+
+.d-particle:nth-child(1) { left: 0; animation: dustFly1 0.7s ease-out infinite; }
+.d-particle:nth-child(2) { left: 7px; animation: dustFly2 0.8s ease-out infinite 0.1s; }
+.d-particle:nth-child(3) { left: 14px; animation: dustFly3 0.6s ease-out infinite 0.2s; }
+.d-particle:nth-child(4) { left: 21px; animation: dustFly1 0.9s ease-out infinite 0.15s; }
+.d-particle:nth-child(5) { left: 28px; animation: dustFly2 0.75s ease-out infinite 0.25s; }
+.d-particle:nth-child(6) { left: 35px; animation: dustFly3 0.85s ease-out infinite 0.35s; }
+
+@keyframes dustFly1 {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.35; }
+    100% { transform: translate(-18px, -10px) scale(0.2); opacity: 0; }
+}
+
+@keyframes dustFly2 {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.25; }
+    100% { transform: translate(-12px, -6px) scale(0.3); opacity: 0; }
+}
+
+@keyframes dustFly3 {
+    0% { transform: translate(0, 0) scale(0.8); opacity: 0.4; }
+    100% { transform: translate(-22px, -12px) scale(0.1); opacity: 0; }
+}
+
+.tow-menu:not(.hidden) .scene {
+    animation: sceneIn 0.4s ease;
+}
+
+@keyframes sceneIn {
+    0% { opacity: 0; transform: scale(0.92); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.tow-menu:not(.hidden) .truck-wrap {
+    animation: truckEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1), truckRide 0.55s ease-in-out infinite 0.5s;
+}
+
+@keyframes truckEnter {
+    0% { transform: translateX(-50%) translateX(-50px); opacity: 0; }
+    100% { transform: translateX(-50%) translateX(0); opacity: 1; }
+}
+
+.tow-header h2 {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 8px 0 6px;
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.5), rgba(15, 23, 42, 0.8));
+    border-bottom: 1px solid rgba(100, 165, 255, 0.15);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tow-content {
+    padding: 14px 16px;
+}
+
+.timer-block {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.timer-top {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+
+.timer-middle {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    line-height: 1;
+}
+
+.timer-num {
+    font-size: 40px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 1);
+    font-variant-numeric: tabular-nums;
+    transition: all 0.3s ease;
+    letter-spacing: -2px;
+    text-shadow: 0 0 15px rgba(100, 165, 255, 0.6), 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.timer-num.warning {
+    color: #fbbf24;
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.7), 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.timer-num.critical {
+    color: #ff6b6b;
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.8), 0 2px 4px rgba(0, 0, 0, 0.7);
+    animation: pulse 0.5s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.timer-suffix {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    text-transform: lowercase;
+}
+
+.status-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background: rgba(30, 58, 138, 0.25);
+    border-radius: 8px;
+    border: 1px solid rgba(100, 165, 255, 0.2);
+}
+
+.status-dot {
+    width: 5px;
+    height: 5px;
+    background: #60a5fa;
+    border-radius: 50%;
+    animation: dotPulse 2s ease infinite;
+    transition: all 0.3s ease;
+}
+
+@keyframes dotPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.6); }
+}
+
+#tow-status-text {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    line-height: 1.45;
+    text-align: center;
+    white-space: pre-line;
+}
+
+.progress-track {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #60a5fa, #3b82f6);
+    border-radius: 2px;
+    transition: width 1s linear;
+    width: 0%;
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
+}
+
+.tow-menu:not(.hidden) {
+    animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-220px) scale(0.96);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0) scale(1);
+    }
+}

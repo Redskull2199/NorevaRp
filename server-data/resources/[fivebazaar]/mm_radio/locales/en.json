@@ -1,0 +1,34 @@
+{
+    "join_notify_description": "%.2f MHz İstasyonuna Katıldınız",
+    "invalid_notify_description": "%.2f MHz İstasyonu mevcut değil",
+    "already_notify_description": "Zaten %.2f MHz İstasyonuna katıldınız",
+    "restricted_notify_description": "%.2f MHz İstasyonuna katılmanıza izin verilmiyor",
+    "volume_notify_description": "Ses seviyesi %d%% olarak ayarlandı",
+    "unsuccess_name": "İsim Değiştirilemedi",
+    "jammer_notify_description": "%.2f MHz İstasyonuna bağlanılamadı",
+    "toggle_defean": "Radyo Susturuldu",
+    "toggle_undeafen": "Radyo Susturma Kaldırıldı",
+    "failed_mute": "Oyuncu Susturulamadı",
+    
+    "ui": {
+        "header": "RADYODA",
+        "frequency": "Frekans",
+        "disconnect": "BAĞLANTIYI KES",
+        "notconnected": "BAĞLI DEĞİL",
+        "settings": "Ayarlar",
+        "channels": "Kanallar",
+        "radio": "Radyo",
+        "members": "Üyeler",
+        "favorites": "Favoriler",
+        "recommended": "Önerilen",
+        "clear": "TEMİZLE",
+        "hide_overlay": "KATMANI GİZLE",
+        "show_overlay": "KATMANI GÖSTER",
+        "save": "KAYDET",
+        "radio_settings": "Radyo Ayarları",
+        "move_radio": "Radyoyu Taşı",
+        "allow_move": "Taşımaya İzin Ver",
+        "overlay_settings": "Katman Ayarları",
+        "enableClicks": "Radyo Sesi"
+    }
+}

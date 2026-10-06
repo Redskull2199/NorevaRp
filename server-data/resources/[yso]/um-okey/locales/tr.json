@@ -1,0 +1,66 @@
+{
+    "sit_down": "[E] - Otur",
+    "reset_table": "Masayı Sıfırla",
+    "seat_occupied": {
+        "main": "Masa Dolu",
+        "description": "Bu koltuk zaten dolu!"
+    },
+    "not_enough_players": {
+        "main": "Yetersiz Oyuncu",
+        "description": "Yeterli oyuncu yok en az 4 oyuncu olmalı!"
+    },
+    "coming_soon": {
+        "main": "Yakında",
+        "description": "Bu özellik henüz desteklenmiyor, lütfen güncellemeyi bekleyin"
+    },
+    "throwPiece": {
+        "main": "Geçersiz İşlem",
+        "description": "Eliniz açıkken bu işlemi yapamazsınız!"
+    },
+    "approveHand": {
+        "main": "El Onayla",
+        "description": "Kendi elinizi onaylayamazsınız!"
+    },
+    "openHand": {
+        "main": "El Aç",
+        "description": "Eliniz zaten açık, diğer oyuncuların onaylamasını bekleyin!",
+        "notEnoughPieces": "Elinizi açmak için 15 taş olmalı.",
+        "noGivePiece": "Önce taş çekmelisiniz!",
+        "turn": "Sıra sizde değil!"
+    },
+    "handRejected": {
+        "main": "El Reddedildi",
+        "description": "Açılan el geçersiz sayıldı!"
+    },
+    "showOpenHand": {
+        "main": "El Açıldı",
+        "description": "%s elini açtı!"
+    },
+    "finishGame": {
+        "main": "Oyun Bitti",
+        "won": "%s oyunu kazandı!",
+        "wonSelf": "Oyunu siz kazandınız!"
+    },
+    "resetTable": {
+        "main": "Masayı Yeniden Kur",
+        "player": "Masayı yeniden kurmak için oyuncuların masadan ayrılması gerekiyor.",
+        "noGame": "Bu masada bir oyun bulunamadı."
+    },
+    "UI": {
+        "okey_menu": {
+            "create_table": "Masa Oluştur",
+            "title": "Okey Menüsü",
+            "description": "Masanın sahibisiniz. Oyunu başlatmak için hazır mısınız?"
+        },
+        "give_center_piece": "Taş Çek",
+        "throw_piece": "Taş At",
+        "give_piece": "Taş Al",
+        "open_hand": "Eli Aç",
+        "approve_hand": "Eli Onayla",
+        "reject_hand": "Eli Reddet",
+        "turn": {
+            "your_turn": "Sıra Sizde",
+            "waiting": " Sıra Bekleniyor"
+        }
+    }
+}

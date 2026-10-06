@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>real-vehicleshop</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@next"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vuex@4.0.0/dist/vuex.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.3.15/dist/vuetify.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@3.3.15/dist/vuetify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <!-- Font Stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <div class="w-full h-[100vh] flex items-end justify-center" v-if="ShowTestDriveTime">
+            <div class="w-full h-[10%] flex items-center justify-start">
+                <span class="w-[30%] text-[#00F0FF] text-[2vw] text-start font-normal font-['Poppins'] ml-[1vw] italic">{{ Language['time_left'] + ': ' + TestDriveTime }}</span>
+            </div>
+        </div>
+        <div class="w-full h-[100vh] flex item-center justify-center left-0 top-0 absolute" v-if="Show" style="background: url('./img/background.png'); background-size: cover; background-repeat: no-repeat;">
+            <div class="w-full h-full flex flex-col left-0 top-0 absolute" v-if="MainPage == 'Normal'">
+                <div class="w-full h-[8.5%] flex items-center justify-center left-0 top-0 absolute"> <!-- Header -->
+                    <div class="w-[97%] h-full flex justify-between">
+                        <div class="w-[50%] h-full flex items-end justify-end">
+                            <div class="w-full h-[49%] flex items-center">
+                                <span class="w-full text-white text-[2.6042vw] font-normal font-['regular']">{{ VehicleShopName }}</span>
+                            </div>
+                        </div>
+                        <div class="w-[20%] h-full flex items-end">
+                            <div class="w-full h-[68%] flex justify-end">
+                                <div class="w-[80%] h-full flex flex-col items-end justify-center">
+                                    <span class="w-full text-white text-[.8333vw] text-end font-semibold font-['medium']">{{ PlayerName }}</span>
+                                    <span class="w-full text-white text-[.8333vw] text-end font-semibold font-['regular']"><span class="text-[#00F0FF] text-[.8333vw] font-semibold font-['regular'] mr-[.2vw]" style="filter: drop-shadow(0px 0px 8.3px rgba(0, 240, 255, 0.66));">$</span>{{ FormatMoney(PlayerMoney) }}</span>
+                                </div>
+                                <div class="w-[3.5%] h-full"></div>
+                                <div class="w-[16.5%] h-full flex items-center justify-center">
+                                    <div class="w-[97%] h-[95%] flex items-center justify-center border-[.1vw] border-[#00F0FF] justify-center rounded-[50%]">
+                                        <img :src="PlayerPfp" class="w-full h-full rounded-[50%]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full h-[60%] flex items-center justify-center left-0 top-[8.5%] absolute">
+                    <div class="w-[96.5%] h-full flex flex-wrap justify-between absolute">
+                        <div class="w-[33.3%] h-full flex flex-col left-0 top-0 absolute">  <!-- Left Menu -->
+                            <div class="w-full h-[7%] flex justify-start">
+                                <span class="w-full text-stone-300 text-[.7813vw] font-medium font-['regular']">{{ VehicleshopDescription }}</span>
+                            </div>
+                            <div class="w-full h-[7.6%] flex flex-wrap items-end justify-start" v-if="HasOwner">
+                                <div class="w-[40%] h-full flex items-center justify-start">
+                                    <svg v-for="n in 5" :key="n" class="mr-[.4vw]" xmlns="http://www.w3.org/2000/svg" width="40" height="38" viewBox="0 0 40 38" fill="none">
+                                        <path :class="{'text-[#00F0FF]': n <= VehicleShopStar, 'text-[#FFFFFF54]': n > VehicleShopStar, 'opacity-33': true }" d="M20 0L24.7148 14.5106H39.9722L27.6287 23.4787L32.3435 37.9894L20 29.0213L7.65651 37.9894L12.3713 23.4787L0.027813 14.5106H15.2852L20 0Z" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                                <div class="w-[10%] h-full flex items-end justify-start">
+                                    <svg class="mb-[.37vw] cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 27 27" fill="none" @click="OpenFeedbacks()">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M27 13.5C27 20.9558 20.9558 27 13.5 27C6.04416 27 0 20.9558 0 13.5C0 6.04416 6.04416 0 13.5 0C20.9558 0 27 6.04416 27 13.5ZM19.1771 7.69618C19.1771 6.49582 18.204 5.52273 17.0036 5.52273H8.30982C7.10946 5.52273 6.13636 6.49582 6.13636 7.69618V19.2879C6.13636 20.4883 7.10946 21.4614 8.30982 21.4614H17.0036C18.204 21.4614 19.1771 20.4883 19.1771 19.2879V18.5635C19.1771 18.1633 18.8527 17.839 18.4526 17.839C18.0525 17.839 17.7281 18.1633 17.7281 18.5635V19.2879C17.7281 19.6881 17.4038 20.0124 17.0036 20.0124H8.30982C7.9097 20.0124 7.58533 19.6881 7.58533 19.2879V7.69618C7.58533 7.29606 7.9097 6.9717 8.30982 6.9717H17.0036C17.4038 6.9717 17.7281 7.29606 17.7281 7.69618C17.7281 8.0963 18.0525 8.42067 18.4526 8.42067C18.8527 8.42067 19.1771 8.0963 19.1771 7.69618ZM21.5036 9.71517C20.7205 8.93208 19.4509 8.93209 18.6678 9.71517L13.0191 15.3638C12.6988 15.6842 12.4866 16.0965 12.4121 16.5434L12.293 17.2583C12.1295 18.2391 12.9798 19.0892 13.9605 18.9258L14.6754 18.8066C15.1222 18.7321 15.5346 18.5199 15.855 18.1996L21.5036 12.551C22.2867 11.7679 22.2867 10.4983 21.5036 9.71517ZM9.75649 9.14604C9.35638 9.14604 9.03201 9.4704 9.03201 9.87052C9.03201 10.2706 9.35638 10.595 9.75649 10.595H15.5524C15.9525 10.595 16.2769 10.2706 16.2769 9.87052C16.2769 9.4704 15.9525 9.14604 15.5524 9.14604H9.75649ZM9.75649 12.0423C9.35638 12.0423 9.03201 12.3666 9.03201 12.7667C9.03201 13.1669 9.35638 13.4912 9.75649 13.4912H12.6544C13.0546 13.4912 13.3789 13.1669 13.3789 12.7667C13.3789 12.3666 13.0546 12.0423 12.6544 12.0423H9.75649ZM9.75649 14.9405C9.35638 14.9405 9.03201 15.2649 9.03201 15.665C9.03201 16.0651 9.35638 16.3895 9.75649 16.3895H10.481C10.8811 16.3895 11.2055 16.0651 11.2055 15.665C11.2055 15.2649 10.8811 14.9405 10.481 14.9405H9.75649Z" fill="white"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M20.479 10.7397C20.2618 10.5225 19.9096 10.5225 19.6924 10.7397L14.0438 16.3884C13.937 16.4951 13.8662 16.6327 13.8414 16.7816L13.7222 17.4965L14.4372 17.3774C14.5861 17.3526 14.7236 17.2818 14.8303 17.1751L20.479 11.5264C20.6963 11.3092 20.6963 10.957 20.479 10.7397Z" fill="white"/>
+                                    </svg>
+                                </div>
+                                <div class="w-[50%] h-full"></div>
+                            </div>
+                            <div class="w-full h-[9%]"></div>
+                            <div class="w-full h-[11.5%] flex flex-col" v-if="SelectedVehicleTable.VehicleIndex >= 0">
+                                <div class="w-full h-[30%] flex items-center justify-start">
+                                    <span class="w-full text-white text-[.8854vw] font-semibold font-['medium']">{{ Language['vehicle_setup_and_information'] }}</span>
+                                </div>
+                                <div class="w-full h-[10%]"></div>
+                                <div class="w-full h-[60%] flex flex-wrap items-start justify-start" v-if="Discount > 0 || SelectedVehicleTable.VehicleDiscount > 0">
+                                    <div v-if="!ChangedPlate" class="w-full"><span class="text-cyan-400 text-[1.9833vw] font-semibold font-['bold']">$ {{ FormatMoney(DiscountedPrice) }}<del class="opacity-70 text-[#ff3f3f] text-[2.0833vw] font-semibold font-['Poppins'] ml-[.4vw] italic">${{ FormatMoney(SelectedVehicleTable.VehiclePrice) }}</del><span class="text-white text-[.9375vw] font-medium font-['regular'] italic ml-[.8vw]">{{ Language['price'] }}</span></span></div>
+                                    <div v-else class="w-full"><span class="text-cyan-400 text-[1.9833vw] font-semibold font-['bold']">$ {{ FormatMoney(DiscountedPrice + PlateChangePrice) }}<del class="opacity-70 text-[#ff3f3f] text-[2.0833vw] font-semibold font-['Poppins'] ml-[.4vw] italic">${{ FormatMoney(SelectedVehicleTable.VehiclePrice) }}</del><span class="text-white text-[.9375vw] font-medium font-['regular'] italic ml-[.8vw]">{{ Language['price'] }}</span></span></div>
+                                </div>
+                                <div class="w-full h-[60%] flex flex-wrap items-start justify-start" v-else>
+                                    <div v-if="!ChangedPlate" class="w-full"><span class="text-cyan-400 text-[1.9833vw] font-semibold font-['bold']">$ {{ FormatMoney(SelectedVehicleTable.VehiclePrice) }}<span class="text-white text-[.9375vw] font-medium font-['regular'] italic ml-[.8vw]">{{ Language['price'] }}</span></span></div>
+                                    <div v-else class="w-full"><span class="text-cyan-400 text-[1.9833vw] font-semibold font-['bold']">$ {{ FormatMoney(SelectedVehicleTable.VehiclePrice + PlateChangePrice) }}<span class="text-white text-[.9375vw] font-medium font-['regular'] italic ml-[.8vw]">{{ Language['price'] }}</span></span></div>
+                                </div>
+                            </div>
+                            <div class="w-full h-[8%] flex items-start justify-start">
+                                <div class="w-full flex items-start justify-start">
+                                    <span class="text-white text-[2.0833vw] font-normal font-['regular'] italic">{{ SelectedVehicleTable.VehicleLabel }} <span class="text-cyan-300 text-[1.4063vw] font-semibold font-['medium'] not-italic">{{ SelectedVehicleTable.VehicleModel }}</span></span>
+                                </div>
+                            </div>
+                            <div class="w-full h-[6%]"></div>
+                            <div class="w-full h-[50.9%] flex flex-wrap justify-between" v-if="SelectedVehicleTable.VehicleIndex >= 0">
+                                <div class="w-[58.8%] h-full flex flex-col">
+                                    <div class="w-full h-[9%]"></div>
+                                    <div class="w-full h-[42%] flex flex-col">
+                                        <div class="w-full h-[39%] flex items-center justify-center bg-[#00EFFF] cursor-pointer" @click="BuyVehicle()" v-if="SelectedVehicleTable.VehicleStock > 0">
+                                            <span class="w-full text-black text-[.7813vw] text-center font-semibold font-['medium']">{{ Language['buy_this_car'] }}</span>
+                                        </div>
+                                        <div class="w-full h-[39%] flex items-center justify-center bg-[#00EFFF] cursor-pointer" @click="PreOrderVehicle()" v-else>
+                                            <span class="w-full text-black text-[.7813vw] text-center font-semibold font-['medium']">{{ Language['preorder_button'] }}</span>
+                                        </div>
+                                        <div class="w-full h-[4.5%]"></div>
+                                        <div class="w-full h-[26%] flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="TestDrive()">
+                                            <div class="w-full text-center"><span class="text-white text-[.7813vw] font-semibold font-['regular']">{{ Language['test_drive'] }}</span> <span class="text-cyan-300 text-[.7813vw] font-semibold font-['medium']">${{ TestDrivePrice }}</span></div>
+                                        </div>
+                                        <div class="w-full h-[4.5%]"></div>
+                                        <div class="w-full h-[26%] flex items-center justify-between">
+                                            <div v-if="SelectedVehicleTable.VehicleStock == 0 || !AllowPlateChange" class="w-full h-full flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="MainPage = 'Component'; setActivePage('preview')">
+                                                <div class="w-full text-white text-[.7813vw] text-center font-semibold font-['regular']">{{ Language['preview'] }}</div>
+                                            </div>
+                                            <div v-else class="w-[49%] h-full flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="MainPage = 'Component'; setActivePage('preview')">
+                                                <div class="w-full text-white text-[.7813vw] text-center font-semibold font-['regular']">{{ Language['preview'] }}</div>
+                                            </div>
+                                            <div class="w-[49%] h-full flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="ChangePlateStatus()" v-if="AllowPlateChange && SelectedVehicleTable.VehicleStock > 0">
+                                                <div class="w-full text-white text-[.7813vw] text-center font-semibold font-['regular']">{{ Language['change_plate'] }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full h-[17%]"></div>
+                                    <div class="w-full h-[10%] flex items-center justify-between">
+                                        <span class="text-white text-[.8854vw] font-semibold font-['medium']">{{ Language['colors'] }}</span>
+                                        <div class="w-[25%] h-full flex items-center justify-end">
+                                            <!-- <img src="./img/color-settings.png" class="w-[1.1458vw] h-[1.25vw] cursor-pointer" @click="SetColorPicker()"> -->
+                                            <img src="./img/color-settings.png" class="w-[1.1458vw] h-[1.25vw]">
+                                        </div>
+                                    </div>
+                                    <div class="w-full h-[3%]"></div>
+                                    <div class="w-full h-[19%] block overflow-y-auto overflow-x-hidden colorstable-container">
+                                        <div v-for="(v, k) in ColorsTable" :key="k" class="w-[8%] h-[47%] flex items-center justify-center cursor-pointer ml-[.18vw] mb-[.2vw] float-left" :class="{ 'border-[.1vw]': SelectedColor == k }" :style="{ background: v.hex }" @click="SelectVehicleColor(k)">
+                                            <svg v-if="SelectedColor == k" xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 16 12" fill="none">
+                                              <path d="M5.43431 11.6971L0.234305 6.49706C-0.0781016 6.18465 -0.0781016 5.67812 0.234305 5.36568L1.36565 4.23431C1.67806 3.92187 2.18462 3.92187 2.49703 4.23431L6 7.73725L13.503 0.234305C13.8154 -0.0781016 14.3219 -0.0781016 14.6344 0.234305L15.7657 1.36568C16.0781 1.67809 16.0781 2.18462 15.7657 2.49706L6.56569 11.6971C6.25325 12.0095 5.74672 12.0095 5.43431 11.6971Z" fill="white"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-[40%] h-full flex">
+                                    <div class="w-full h-full bg-[#000000CC] rounded-[.5vw]" v-if="ShowColorPicker">
+                                        <div class="w-full h-[12%] flex flex-wrap">
+                                            <div class="w-[23.5%] h-full"></div>
+                                            <div class="w-[52.5%] h-full flex items-end justify-center">
+                                                <div class="text-cyan-400 text-[.9375vw] font-semibold font-['regular']">{{ Language['color_settings'] }}</div>
+                                            </div>
+                                            <div class="w-[13%] h-full"></div>
+                                            <div class="w-[7.5%] h-full flex items-center justify-center">
+                                                <div class="w-full h-[50%] flex items-center justify-center mb-[.2vw] cursor-pointer" @click="SetColorPicker()">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                                                        <path d="M14.5 0H1.5C0.671875 0 0 0.716667 0 1.6V13.3333C0 14.2167 0.671875 14.9333 1.5 14.9333H14.5C15.3281 14.9333 16 14.2167 16 13.3333V1.6C16 0.716667 15.3281 0 14.5 0ZM11.8875 9.68333C12.0375 9.84333 12.0375 10.1033 11.8875 10.2633L10.6219 11.6133C10.4719 11.7733 10.2281 11.7733 10.0781 11.6133L8 9.37667L5.92188 11.6133C5.77187 11.7733 5.52813 11.7733 5.37813 11.6133L4.1125 10.2633C3.9625 10.1033 3.9625 9.84333 4.1125 9.68333L6.20937 7.46667L4.1125 5.25C3.9625 5.09 3.9625 4.83 4.1125 4.67L5.37813 3.32C5.52813 3.16 5.77187 3.16 5.92188 3.32L8 5.55667L10.0781 3.32C10.2281 3.16 10.4719 3.16 10.6219 3.32L11.8875 4.67C12.0375 4.83 12.0375 5.09 11.8875 5.25L9.79062 7.46667L11.8875 9.68333Z" fill="white"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="w-[3.5%] h-full"></div>
+                                        </div>
+                                        <div class="w-full h-[4%]"></div>
+                                        <div class="w-full h-[47.5%] flex items-center justify-center">
+                                            <div class="w-[64%] h-full flex items-center justify-center rounded-[50%]">
+                                                <div class="w-full h-full">
+                                                    <div id="color-picker"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full h-[.8%]"></div>
+                                        <div class="w-full h-[18%] flex flex-col items-center">
+                                            <div class="w-[92%] h-[22%] flex items-center justify-start">
+                                                <span class="w-full text-white text-[.625vw] font-medium font-['medium']">{{ Language['color_hex'] }}</span>
+                                            </div>
+                                            <div class="w-full h-[6%]"></div>
+                                            <div class="w-[92%] h-[72%] flex items-center justify-center rounded-[.5208vw] bg-[#404040E5]">
+                                                <span class="w-full color-text">{{ ColorPickerColor }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="w-full h-[3%]"></div>
+                                        <div class="w-full h-[9%] flex items-center justify-center">
+                                            <div class="w-[58%] h-full flex items-center justify-center bg-[#4E4E4E] rounded-[.3125vw] cursor-pointer" @click="ChangeVehicleColorFromSelector()">
+                                                <span class="w-full text-center text-white text-xs font-medium font-['medium']">{{ Language['change_color'] }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="w-full h-[5%]"></div>
+                                    </div>
+                                    <div class="w-full h-full flex items-center justify-start" v-if="ShowPlateChange">
+                                        <div class="w-[68%] h-[30%] flex items-center justify-center bg-[#000000CC] rounded-[.5vw]">
+                                            <div class="w-[95%] h-[90%] flex items-center justify-center rounded-[.5vw] bg-white relative">
+                                                <img src="./img/plate-background.png" class="w-[7.6563vw] h-[3.8542vw]">
+                                                <input type="text" class="w-[7.1563vw] h-[2.35vw] outline-none bottom-[.5vw] absolute plate-input" placeholder="ABC123" v-model="PlateInput">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-[17.7%] h-full flex flex-col right-0 top-0 absolute">  <!-- Right Menu -->
+                            <div class="w-full h-[14%] flex flex-col relative">
+                                <div class="w-full"><span class="text-white text-[.8333vw] font-semibold font-['regular']">{{ Language['search'] }}</span></div>
+                                <div class="w-full h-[62%] flex items-center bg-[#5555554D] bottom-0 absolute">
+                                    <input type="text" class="w-[80%] h-full left-[.5vw] outline-none absolute search-input" :placeholder="Language['search_input_placeholder']" v-model="SearchInput" @input="Searching()">
+                                    <svg class="right-[.9vw] absolute" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                                        <path opacity="0.83" d="M20.7144 18.1589L16.6248 14.0694C16.4403 13.8848 16.1901 13.7823 15.9275 13.7823H15.2589C16.391 12.3343 17.0637 10.5131 17.0637 8.53187C17.0637 3.81883 13.2449 0 8.53187 0C3.81883 0 0 3.81883 0 8.53187C0 13.2449 3.81883 17.0637 8.53187 17.0637C10.5131 17.0637 12.3343 16.391 13.7823 15.2589V15.9275C13.7823 16.1901 13.8848 16.4403 14.0694 16.6248L18.1589 20.7144C18.5445 21.1 19.168 21.1 19.5495 20.7144L20.7103 19.5536C21.0959 19.168 21.0959 18.5445 20.7144 18.1589ZM8.53187 13.7823C5.63186 13.7823 3.28149 11.436 3.28149 8.53187C3.28149 5.63186 5.62776 3.28149 8.53187 3.28149C11.4319 3.28149 13.7823 5.62776 13.7823 8.53187C13.7823 11.4319 11.436 13.7823 8.53187 13.7823Z" fill="#B1B1B1"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="w-full h-[2.3%]"></div>
+                            <div class="w-full h-[2.7%] flex items-center justify-start">
+                                <span class="text-white text-[.8333vw] font-semibold font-['regular']">{{ Language['type'] }}</span>
+                            </div>
+                            <div class="w-full h-[1.3%]"></div>
+                            <div class="w-full h-[55%] block overflow-y-auto overflow-x-hidden">
+                                <div v-for="(v, k) in CategoryList" class="w-full h-[16%] flex flex-wrap items-center justify-center bg-[#000000bd] mb-[.4vw] cursor-pointer relative hover:scale-[.98]" @click="SelectedVehicleCategory = v.name" :class="{ 'bg-[#00F0FF]': SelectedVehicleCategory == v.name }">
+                                    <span style="font-size: 1vw;" class="top-[.8vw] left-[1.2vw] absolute" :style="{ color: SelectedVehicleCategory == v.name ? '#000000' : '#fff' }">
+                                        <i class="fa-solid fa-list"></i>
+                                    </span>
+                                    <span class="w-[80%] text-[.8333vw] font-semibold font-['medium'] left-[3.2vw] top-[.815vw] absolute" :style="{ color: SelectedVehicleCategory == v.name ? '#000000' : '#fff' }">{{ v.label }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-[21.1%] h-[26.7%] block overflow-x-hidden left-[15.3%] top-[9.7%] absolute feedback-container" :class="{ 'overflow-y-auto': Feedbacks.length > 2 }" v-if="ShowFeedback">
+                            <div v-for="(v, k) in Feedbacks" class="w-[98%] h-[48%] flex flex-wrap bg-[#7B7B7BCC] rounded-[.2604vw] relative" :class="{ 'mb-[.4vw]': k !== Feedbacks.length - 1 }">
+                                <div class="w-[22%] h-full flex items-center justify-center">
+                                    <img :src="v.pfp" class="w-full h-full rounded-[.2604vw]">
+                                </div>
+                                <div class="w-[2%] h-full"></div>
+                                <div class="w-[76%] h-full flex items-center jusify-center">
+                                    <div class="w-full h-[82%] flex flex-col">
+                                        <div class="w-full h-[35%] flex flex-wrap">
+                                            <div class="w-[50%] h-full flex items-end justify-start">
+                                                <span class="w-full text-white text-[.7292vw] font-semibold font-['regular']">{{ v.name }}</span>
+                                            </div>
+                                            <div class="w-[47.5%] h-full flex items-center justify-end">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="33" height="31" viewBox="0 0 33 31" fill="none">
+                                                    <g filter="url(#filter0_d_3_448)">
+                                                      <path d="M16.5 5L19.0819 12.9463H27.4371L20.6776 17.8574L23.2595 25.8037L16.5 20.8926L9.74047 25.8037L12.3224 17.8574L5.56285 12.9463H13.9181L16.5 5Z" fill="white"/>
+                                                    </g>
+                                                    <defs>
+                                                      <filter id="filter0_d_3_448" x="0.562836" y="0" width="31.8743" height="30.8037" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                                        <feOffset/>
+                                                        <feGaussianBlur stdDeviation="2.5"/>
+                                                        <feComposite in2="hardAlpha" operator="out"/>
+                                                        <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.57 0"/>
+                                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_448"/>
+                                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_448" result="shape"/>
+                                                      </filter>
+                                                    </defs>
+                                                </svg>
+                                                <span class="text-white text-[.8854vw] font-semibold font-['regular']">{{ v.stars + '.0' }}</span>
+                                            </div>
+                                            <div class="w-[2.5%] h-full"></div>
+                                        </div>
+                                        <div class="w-full h-[12%]"></div>
+                                        <div class="w-[97%] h-[53%] block overflow-y-auto overflow-x-hidden relative" ref="FeedbackScrollContainer">
+                                            <span class="w-full text-white text-[.615vw] font-medium font-['regular'] top-0 absolute">{{ v.message }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full h-[6.5%] left-0 top-[68.5%] absolute"></div>
+                <div class="w-full h-[25%] flex flex-col left-0 bottom-0 absolute">  <!-- Bottom Menu -->
+                    <div class="w-full h-[6%] flex items-center justify-center">
+                        <div class="w-[92%] h-full flex items-center justify-start">
+                            <div class="text-white text-[.8854vw] font-semibold font-['regular']">{{ Language['car_list'] }}</div>
+                        </div>
+                    </div>
+                    <div class="w-full h-[3%]"></div>
+                    <div class="w-full h-[85.5%] flex items-center justify-center">
+                        <div class="w-[99%] h-full flex flex-wrap">
+                            <div class="w-[3.3%] h-full flex">
+                                <div class="w-full h-full flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="ShowMoreCar('left')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                        <path opacity="0.5" d="M12.5757 1.42822L11.4917 0.344238C11.0327 -0.114746 10.2905 -0.114746 9.83643 0.344238L0.344238 9.83154C-0.114746 10.2905 -0.114746 11.0327 0.344238 11.4868L9.83643 20.979C10.2954 21.438 11.0376 21.438 11.4917 20.979L12.5757 19.895C13.0396 19.4312 13.0298 18.6743 12.5562 18.2202L6.67236 12.6147H20.7056C21.355 12.6147 21.8774 12.0923 21.8774 11.4429V9.88037C21.8774 9.23096 21.355 8.7085 20.7056 8.7085H6.67236L12.5562 3.10303C13.0347 2.64893 13.0444 1.89209 12.5757 1.42822Z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="w-[.4%] h-full"></div>
+                            <div class="w-[92.7%] h-full flex flex-row whitespace-nowrap overflow-x-hidden overflow-y-hidden" ref="vc">
+                                <div class="w-[19%] h-full flex flex-col shrink-0 mr-[1.15vw] relative cursor-pointer" v-for="(v, k) in FilterVehicles" :class="{ 'opacity-[.7]': v.stock == 0, 'hover:scale-[.97]': v.stock > 0 }" @click="SelectVehicle(k, v)">
+                                    <div class="w-full h-[78.5%] bg-[#000000DE] rounded-[.2604vw] left-0 top-0 absolute">
+                                        <img src="./img/vehicle-container-effect-gray.png" class="w-[14.5833vw] h-full right-0 absolute" v-if="SelectedVehicleTable.VehicleIndex != k">
+                                        <img src="./img/vehicle-container-effect-blue.png" class="w-[14.5833vw] h-full right-0 absolute" v-else>
+                                        <div class="w-full h-full flex flex-wrap items-center left-0 top-0 absolute">
+                                            <div class="w-[4%] h-full"></div>
+                                            <div class="w-[80%] h-[86%] flex flex-col items-start justify-start">
+                                                <span class="text-[.8333vw] font-semibold font-['medium']" :class="{ 'text-[#989898]': v.stock == 0, 'text-white': v.stock > 0 }">{{ v.label }}</span>
+                                                <span class="text-neutral-400 text-[.6771vw] font-semibold font-['regular']">{{ v.model }}</span>
+                                            </div>
+                                            <div class="w-[16%] h-full"></div>
+                                        </div>
+                                        <div class="w-[80%] h-full flex items-center justify-center right-0 top-0 absolute">
+                                            <img :src="v.img" class="w-full h-auto" :class="{ 'grayscale': v.stock == 0 }">
+                                        </div>
+                                    </div>
+                                    <div class="w-full h-[3%] left-0 top-[78.5%] absolute"></div>
+                                    <div class="w-full h-[18.5%] flex items-center justify-between left-0 bottom-0 bg-[#000000DE] rounded-[.2604vw] absolute">
+                                        <span class="w-[40%] text-[.8333vw] font-semibold font-['regular'] left-[.65vw] absolute" :class="{ 'text-[#989898]': v.stock == 0, 'text-white': v.stock > 0 }" v-if="HasOwner">{{ Language['stock'] + ': ' + v.stock }}</span>
+                                        <span class="w-[40%] text-white text-[.8333vw] font-semibold font-['regular'] left-[.65vw] absolute" v-else>{{ Language['stock'] + ': ' + Language['available'] }}</span>
+                                        <div v-if="Discount > 0" class="w-[60%] flex items-center justify-end right-[.65vw] absolute">
+                                            <span class="w-[60%] text-[.8333vw] text-right font-semibold font-['regular']" :class="{ 'text-[#989898]': v.stock == 0, 'text-[#fff]': SelectedVehicleTable.VehicleIndex != k && v.stock > 0, 'text-cyan-400': SelectedVehicleTable.VehicleIndex == k }">$ {{ FormatMoney(DiscountedPriceWithValue(v.price)) }}</span>
+                                            <del class="w-[40%] text-[#FF4040] text-[.65vw] text-right font-semibold font-['regular']">$ {{ FormatMoney(v.price) }}</del>
+                                        </div>
+                                        <div v-else-if="v.discount > 0" class="w-[60%] flex items-center justify-end right-[.65vw] absolute">
+                                            <span class="w-[60%] text-[.8333vw] text-right font-semibold font-['regular']" :class="{ 'text-[#989898]': v.stock == 0, 'text-[#fff]': SelectedVehicleTable.VehicleIndex != k && v.stock > 0, 'text-cyan-400': SelectedVehicleTable.VehicleIndex == k }">$ {{ FormatMoney(DiscountPriceWithValue2(v.discount, v.price)) }}</span>
+                                            <del class="w-[40%] text-[#FF4040] text-[.65vw] text-right font-semibold font-['regular']">$ {{ FormatMoney(v.price) }}</del>
+                                        </div>
+                                        <span v-else class="w-[60%] text-[.8333vw] text-right font-semibold font-['regular'] right-[.65vw] absolute" :class="{ 'text-[#989898]': v.stock == 0, 'text-[#fff]': SelectedVehicleTable.VehicleIndex != k && v.stock > 0, 'text-cyan-400': SelectedVehicleTable.VehicleIndex == k }">$ {{ FormatMoney(v.price) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-[.3%] h-full"></div>
+                            <div class="w-[3.3%] h-full">
+                                <div class="w-full h-full flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="ShowMoreCar('right')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                        <path d="M9.30176 1.42822L10.3857 0.344238C10.8447 -0.114746 11.5869 -0.114746 12.041 0.344238L21.5332 9.83154C21.9922 10.2905 21.9922 11.0327 21.5332 11.4868L12.041 20.979C11.582 21.438 10.8398 21.438 10.3857 20.979L9.30176 19.895C8.83789 19.4312 8.84766 18.6743 9.32129 18.2202L15.2051 12.6147H1.17188C0.522461 12.6147 0 12.0923 0 11.4429V9.88037C0 9.23096 0.522461 8.7085 1.17188 8.7085H15.2051L9.32129 3.10303C8.84277 2.64893 8.83301 1.89209 9.30176 1.42822Z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-[5.5%]"></div>
+                </div>
+            </div>
+            <div class="w-full h-full left-0 top-0 absolute" v-if="MainPage == 'Component'">
+                <component :is="activePage"></component>
+            </div>
+            <div class="w-full h-full flex flex-col left-0 top-0 absolute" v-if="MainPage == 'Bossmenu'" style="background: url('./img/background.png');">
+                <div class="w-full h-[8.5%] flex items-center justify-center left-0 top-0 absolute">
+                    <div class="w-[97%] h-full flex justify-between">
+                        <div class="w-[50%] h-full flex items-end justify-end">
+                            <div class="w-full h-[49%] flex items-center">
+                                <span class="w-full text-white text-[2.6042vw] font-normal font-['regular']">{{ VehicleShopName }}</span>
+                            </div>
+                        </div>
+                        <div class="w-[20%] h-full flex items-end">
+                            <div class="w-full h-[68%] flex justify-end">
+                                <div class="w-[80%] h-full flex flex-col items-end justify-center">
+                                    <span class="w-full text-white text-[.8333vw] text-end font-semibold font-['medium']">{{ PlayerName }}</span>
+                                    <span class="w-full text-white text-[.8333vw] text-end font-semibold font-['regular']">{{ PlayerRank }} | <span class="text-[#00F0FF] text-[.8333vw] font-semibold font-['regular'] mr-[.2vw]" style="filter: drop-shadow(0vw 0vw .15vw rgba(0, 240, 255, 0.66));">$</span>{{ FormatMoney(PlayerMoney) }}</span>
+                                </div>
+                                <div class="w-[3.5%] h-full"></div>
+                                <div class="w-[16.5%] h-full flex items-center justify-center">
+                                    <div class="w-[97%] h-[95%] flex items-center justify-center border-[.1vw] border-[#00F0FF] justify-center rounded-[50%]">
+                                        <img :src="PlayerPfp" class="w-full h-full rounded-[50%]">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full h-[6%] left-0 top-[8.5%] absolute"></div>
+                <div class="w-full h-[59%] flex flex-wrap left-0 top-[14.5%] absolute">
+                    <div class="w-[1.7%] h-full"></div>
+                    <div class="w-[18.8%] h-full flex flex-col">
+                        <div class="w-full h-[14.5%] flex flex-col relative">
+                            <div class="w-full h-[54%] flex items-center justify-center bg-[#00F0FF] top-0 absolute">
+                                <span class="w-full text-black text-[.7813vw] text-center font-semibold font-['Poppins']">{{ Language['company_money'] }}</span>
+                            </div>
+                            <div class="w-full h-[40%] bg-[#000000DE] bottom-0 absolute">
+                                <div class="w-full h-full flex items-center justify-center">
+                                    <span class="text-cyan-300 text-[.7813vw] font-semibold font-['Poppins'] mr-[.4vw]">${{ FormatMoney(CompanyMoney) }}</span>
+                                    <span class="text-white text-[.7813vw] font-semibold font-['Poppins']">{{ Language['available'] }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full h-[5%] flex items-center justify-center relative">
+                            <div class="w-full text-white text-[.8333vw] font-semibold font-['Poppins'] pt-[1vw] absolute">{{ Language['menu'] }}</div>
+                        </div>
+                        <div class="w-full h-[1.75%]"></div>
+                        <div class="w-full h-[78.8%] block">
+                            <div v-for="(v, k) in BossmenuCategory" class="w-full h-[11.5%] flex items-center justify-start bg-[#000000BD] mb-[.3vw] cursor-pointer relative" :class="{ 'bg-[#00F0FF]': SelectedBossmenuCategory == k, 'hover:scale-[.985]': SelectedBossmenuCategory != k }" @click="SelectedBossmenuCategory = k; setActivePage(v.name);">
+                                <inlinesvg class="left-[.7vw] absolute" :src="'./img/svg/Categories/'+v.name+'.svg'" :fill="SelectedBossmenuCategory == k ? 'black' : 'white'"></inlinesvg>
+                                <span class="text-[.8333vw] font-semibold font-['Poppins'] left-[3.3vw] absolute" :class="{ 'text-black': SelectedBossmenuCategory == k, 'text-white': SelectedBossmenuCategory != k }">{{ v.label }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-[2%] h-full"></div>
+                    <div class="w-[72.2%] h-full flex flex-col">
+                        <div class="w-full h-[9%] flex flex-wrap">
+                            <div class="w-[34.2%] h-full flex item-start justify-start">
+                                <inlinesvg class="w-[1.0909vw] h-[1.0938vw] flex items-center justify-center mt-[.2vw]" src="./img/svg/second-settings.svg"></inlinesvg>
+                                <span class="text-white text-[1vw] font-medium font-['Oswald'] pb-[.4vw] ml-[.5vw]" v-if="SelectedBossmenuCategory > -1">{{ BossmenuCategory[SelectedBossmenuCategory].label }}</span>
+                                <div class="w-[13vw] h-[.15vw] bg-white mt-[.8vw] ml-[.5vw]"></div>
+                            </div>
+                            <div class="w-[65.8%] h-full">
+                                <div class="w-full h-full flex items-center justify-end" v-if="activePage == 'company'">
+                                    <div class="w-[37.23%] h-[90%] bg-[#000000BF] rounded-[.2604vw] relative cursor-pointer" @click="setActivePage('companystaffsettings')">
+                                        <div class="w-[60%] h-full flex items-center justify-start left-0 top-0 absolute">
+                                            <span class="w-[95%] text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] ml-[5%]">{{ Language['staff_settings'] }}</span>
+                                        </div>
+                                        <img src="./img/bossmenu/employee-bg.png" class="w-[10vw] h-full right-0 top-0 absolute">
+                                    </div>
+                                    <div class="w-[37.2%] h-[90%] bg-[#000000BF] rounded-[.2604vw] relative cursor-pointer ml-[.4vw]" @click="setActivePage('companysettings')">
+                                        <div class="w-[60%] h-full flex items-center justify-start left-0 top-0 absolute">
+                                            <span class="w-[95%] text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] ml-[5%]">{{ Language['company_settings'] }}</span>
+                                        </div>
+                                        <img src="./img/bossmenu/settings-bg.png" class="w-[12vw] h-full right-0 top-0 absolute">
+                                    </div>
+                                </div>
+                            </div> <!-- top-right container -->
+                        </div>
+                        <div class="w-full h-[91%]">
+                            <component :is="activePage"></component>
+                        </div>
+                    </div>
+                    <div class="w-[5.3%] h-full"></div>
+                </div>
+                <div class="w-full h-[1.5%] left-0 bottom-[25%] absolute"></div>
+                <div class="w-full h-[25%] flex flex-col left-0 bottom-0 absolute">
+                    <div class="w-full h-[6%] flex items-center justify-center">
+                        <div class="w-[92%] h-full flex items-center justify-start">
+                            <div class="w-full text-white text-[.7vw] font-semibold font-['regular'] ml-[.3vw]">{{ Language['vehicle_stock_list'] }}</div>
+                        </div>
+                    </div>
+                    <div class="w-full h-[3%]"></div>
+                    <div class="w-full h-[85.5%] flex items-center justify-center">
+                        <div class="w-[99%] h-full flex flex-wrap">
+                            <div class="w-[3.3%] h-full flex">
+                                <div class="w-full h-full flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="ShowMoreCar('left')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                        <path opacity="0.5" d="M12.5757 1.42822L11.4917 0.344238C11.0327 -0.114746 10.2905 -0.114746 9.83643 0.344238L0.344238 9.83154C-0.114746 10.2905 -0.114746 11.0327 0.344238 11.4868L9.83643 20.979C10.2954 21.438 11.0376 21.438 11.4917 20.979L12.5757 19.895C13.0396 19.4312 13.0298 18.6743 12.5562 18.2202L6.67236 12.6147H20.7056C21.355 12.6147 21.8774 12.0923 21.8774 11.4429V9.88037C21.8774 9.23096 21.355 8.7085 20.7056 8.7085H6.67236L12.5562 3.10303C13.0347 2.64893 13.0444 1.89209 12.5757 1.42822Z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="w-[.4%] h-full"></div>
+                            <div class="w-[92.7%] h-full flex flex-row whitespace-nowrap overflow-x-hidden overflow-y-hidden" ref="vc">
+                                <div class="w-[19%] h-full flex flex-col shrink-0 mr-[1.15vw] relative" v-for="(v, k) in VehiclesTable" :class="{ 'opacity-[.7]': v.stock == 0, 'cursor-not-allowed': v.stock == 0, 'hover:scale-[.97]': v.stock > 0 }">
+                                    <div class="w-full h-[78.5%] bg-[#000000DE] rounded-[.2604vw] left-0 top-0 absolute">
+                                        <img src="./img/vehicle-container-effect-gray.png" class="w-[14.5833vw] h-full right-0 absolute">
+                                        <div class="w-full h-full flex flex-wrap items-center left-0 top-0 absolute">
+                                            <div class="w-[4%] h-full"></div>
+                                            <div class="w-[80%] h-[86%] flex flex-col items-start justify-start">
+                                                <span class="text-[.8333vw] font-semibold font-['medium']" :class="{ 'text-[#989898]': v.stock == 0, 'text-white': v.stock > 0 }">{{ v.label }}</span>
+                                                <span class="text-neutral-400 text-[.6771vw] font-semibold font-['regular']">{{ v.model }}</span>
+                                            </div>
+                                            <div class="w-[16%] h-full"></div>
+                                        </div>
+                                        <div class="w-[80%] h-full flex items-center justify-center right-0 top-0 absolute">
+                                            <img :src="v.img" class="w-full h-auto" :class="{ 'grayscale': v.stock == 0 }">
+                                        </div>
+                                    </div>
+                                    <div class="w-full h-[3%] left-0 top-[78.5%] absolute"></div>
+                                    <div class="w-full h-[18.5%] flex items-center justify-between left-0 bottom-0 bg-[#000000DE] rounded-[.2604vw] absolute">
+                                        <span class="w-[40%] text-[.8333vw] font-semibold font-['regular'] left-[.65vw] absolute" :class="{ 'text-[#989898]': v.stock == 0, 'text-white': v.stock > 0 }">{{ Language['stock'] + ': ' + v.stock }}</span>
+                                        <div v-if="Discount > 0" class="w-[60%] flex items-center justify-end right-[.65vw] absolute">
+                                            <span class="w-[60%] text-[.8333vw] text-right font-semibold font-['regular']" :class="{ 'text-[#989898]': v.stock == 0, 'text-[#fff]': SelectedVehicleTable.VehicleIndex != k && v.stock > 0, 'text-cyan-400': SelectedVehicleTable.VehicleIndex == k }">$ {{ FormatMoney(DiscountedPriceWithValue(v.price)) }}</span>
+                                            <del class="w-[40%] text-[#FF4040] text-[.65vw] text-right font-semibold font-['regular']">$ {{ FormatMoney(v.price) }}</del>
+                                        </div>
+                                        <div v-else-if="v.discount > 0" class="w-[60%] flex items-center justify-end right-[.65vw] absolute">
+                                            <span class="w-[60%] text-[.8333vw] text-right font-semibold font-['regular']" :class="{ 'text-[#989898]': v.stock == 0, 'text-[#fff]': SelectedVehicleTable.VehicleIndex != k && v.stock > 0, 'text-cyan-400': SelectedVehicleTable.VehicleIndex == k }">$ {{ FormatMoney(DiscountPriceWithValue2(v.discount, v.price)) }}</span>
+                                            <del class="w-[40%] text-[#FF4040] text-[.65vw] text-right font-semibold font-['regular']">$ {{ FormatMoney(v.price) }}</del>
+                                        </div>
+                                        <span v-else class="w-[60%] text-[.8333vw] text-right font-semibold font-['regular'] right-[.65vw] absolute" :class="{ 'text-[#989898]': v.stock == 0, 'text-[#fff]': SelectedVehicleTable.VehicleIndex != k && v.stock > 0, 'text-cyan-400': SelectedVehicleTable.VehicleIndex == k }">$ {{ FormatMoney(v.price) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-[.3%] h-full"></div>
+                            <div class="w-[3.3%] h-full">
+                                <div class="w-full h-full flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="ShowMoreCar('right')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                        <path d="M9.30176 1.42822L10.3857 0.344238C10.8447 -0.114746 11.5869 -0.114746 12.041 0.344238L21.5332 9.83154C21.9922 10.2905 21.9922 11.0327 21.5332 11.4868L12.041 20.979C11.582 21.438 10.8398 21.438 10.3857 20.979L9.30176 19.895C8.83789 19.4312 8.84766 18.6743 9.32129 18.2202L15.2051 12.6147H1.17188C0.522461 12.6147 0 12.0923 0 11.4429V9.88037C0 9.23096 0.522461 8.7085 1.17188 8.7085H15.2051L9.32129 3.10303C8.84277 2.64893 8.83301 1.89209 9.30176 1.42822Z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-[5.5%]"></div>
+                </div>
+                <div class="w-[48.3%] h-[6%] flex justify-end right-[5.3vw] top-[7vw] absolute" v-if="activePage == 'vehicles'">
+                    <div class="w-[33.2%] h-full relative">
+                        <div class="w-full h-[63%] flex flex-wrap bg-[#55555599] rounded-[.28vw] left-0 bottom-0 absolute">
+                            <input type="text" class="w-[88%] h-full outline-none pl-[.3vw] left-0 top-0 absolute search-input-second placeholder:opacity-[.85]" :placeholder="Language['search_input_placeholder']" v-model="SearchInput" @input="Searching()">
+                            <div class="w-[12%] h-full flex items-center justify-center right-0 top-0 absolute">
+                                <svg class="w-[1vw] h-[1vw]" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <path opacity="0.83" d="M17.7552 14.9629L14.2499 11.5931C14.0917 11.441 13.8772 11.3565 13.6522 11.3565C13.4226 11.3565 13.2923 11.087 13.4223 10.8977C14.1839 9.78835 14.6261 8.45983 14.6261 7.03023C14.6261 3.1467 11.3528 0 7.31303 0C3.27329 0 0 3.1467 0 7.03023C0 10.9137 3.27329 14.0605 7.31303 14.0605C8.81082 14.0605 10.2019 13.6292 11.3609 12.8874C11.552 12.7651 11.8134 12.8974 11.8134 13.1242C11.8134 13.3405 11.9013 13.5467 12.0595 13.6988L15.5648 17.0686C15.8953 17.3863 16.4297 17.3863 16.7567 17.0686L17.7517 16.1121C18.0822 15.7943 18.0822 15.2806 17.7552 14.9629ZM7.31303 11.3565C4.82731 11.3565 2.81271 9.42321 2.81271 7.03023C2.81271 4.64062 4.82379 2.70393 7.31303 2.70393C9.79876 2.70393 11.8134 4.63724 11.8134 7.03023C11.8134 9.41983 9.80228 11.3565 7.31303 11.3565Z" fill="#B1B1B1"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-[36.5%] h-full flex items-center justify-center bg-[#000000BF] rounded-[.2604vw] ml-[.5vw] relative cursor-pointer" @click="setActivePage('buyvehicle')">
+                        <img src="./img/bossmenu/car-bg.png" class="w-[14.5vw] h-full right-0 absolute">
+                        <div class="w-[70%] h-full flex items-center justify-start left-[.8vw] absolute">
+                            <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins']">{{ Language['buy_vehicle'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-full left-0 top-0 absolute" v-if="ShowBossPopup">
+                <bosspopup></bosspopup>
+            </div>
+            <div class="w-full h-full flex items-center justify-center left-0 top-0 absolute" style="background: url('./img/popup-background.png'); background-size: cover; background-repeat: no-repeat;" v-if="ShowPopupScrren">
+                <div class="w-[50vw] h-[21vw] flex flex-col border-[.1042vw] border-[#575757] bg-[#000000] rounded-[1.1979vw]" style="background-image: url('./img/popup-background-effect.png'); background-size: cover; background-repeat: no-repeat;" v-if="NormalPopupSettings.Show">
+                    <div class="w-full h-[8.8%]"></div>
+                    <div class="w-full h-[7%] flex items-center justify-center">
+                        <span class="w-full text-zinc-400 text-[1.4667vw] text-center font-semibold font-['Poppins']">{{ Language['are_you_sure'] }}</span>
+                    </div>
+                    <div class="w-full h-[12%]"></div>
+                    <div class="w-full h-[9%]">
+                        <div class="w-full h-full flex items-center justify-center">
+                            <span class="text-zinc-400 text-[1.3542vw] font-medium font-['Poppins']">{{ NormalPopupSettings.HeaderOne }} -</span>
+                            <span class="text-cyan-400 text-[1.3542vw] font-medium font-['Poppins'] ml-[.4vw]">{{ NormalPopupSettings.HeaderTwo }}</span>
+                        </div>
+                    </div>
+                    <div class="w-full h-[9.2%]"></div>
+                    <div class="w-full h-[25%] flex items-start justify-center">
+                        <span class="w-[90%] text-center text-zinc-400 text-[1.1979vw] font-normal font-['Poppins']">{{ NormalPopupSettings.Description }}</span>
+                    </div>
+                    <div class="w-full h-[5.5%]"></div>
+                    <div class="w-full h-[23.5%] flex items-center justify-center">
+                        <div class="w-[13.2292vw] h-[2.7208vw] flex items-center justify-center opacity-[.85] bg-[#4D4D4D] rounded-[.3125vw] mr-[2vw] mb-[.4vw] cursor-pointer hover:opacity-[1]" @click="ClosePopup('normal')">
+                            <span class="w-full text-center text-[#B1B1B1] text-[1.3542vw] font-medium font-['Poppins']">{{ Language['cancel'].toUpperCase() }}</span>
+                        </div>
+                        <div class="w-[13.2292vw] h-[2.7208vw] flex items-center justify-center opacity-[.85] bg-[#00F0FF] rounded-[.3125vw] ml-[2vw] mb-[.4vw] cursor-pointer hover:opacity-[1]" style="box-shadow: 0vw 0vw .9vw 0vw #00F0FF;" @click="VehicleshopPopupFunction(NormalPopupSettings.Function)">
+                            <div class="w-full text-center text-black text-[1.3542vw] font-medium font-['Poppins']">{{ Language['confirm'].toUpperCase() }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-[26.4583vw] min-h-[4.2708vw] rounded-[.3563vw] top-[5%] absolute" style="background: url('./img/notify-background.png'); background-size: cover; background-repeat: no-repeat;" v-if="NotifySettings.Show">
+                <img class="w-full h-full absolute top-0 left-0" src="./img/notify-background-effect-success.png" v-if="NotifySettings.Type == 'success'">
+                <img class="w-full h-full absolute top-0 left-0" src="./img/notify-background-effect-information.png" v-else-if="NotifySettings.Type == 'information'">
+                <img class="w-full h-full absolute top-0 left-0" src="./img/notify-background-effect-error.png" v-else>
+                <div class="w-full flex flex-wrap relative">
+                    <div class="w-[3%]"></div>
+                    <div class="w-[10%] flex items-center justify-end">
+                        <svg class="w-[2vw] h-[2vw] mt-[.8vw]" xmlns="http://www.w3.org/2000/svg" width="40" height="36" viewBox="0 0 40 36" fill="none">
+                            <path d="M2.36307 29.8451L16.6958 3.80911C18.0239 1.39696 21.9763 1.39696 23.3044 3.80911L37.6372 29.8451C38.7998 31.957 37.0277 34.4 34.3329 34.4H5.66726C2.97252 34.4 1.2004 31.957 2.36307 29.8451Z" :stroke="NotifyColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20.0001 12.7981V19.9981" :stroke="NotifyColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20.0001 27.229V27.2019" :stroke="NotifyColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="w-[3.5%]"></div>
+                    <div class="w-[74%] flex flex-col">
+                        <div class="w-full flex items-end justify-start pt-[.5vw]">
+                            <span class="w-full text-white text-[.8333vw] text-start font-semibold font-['Poppins']">{{ NotifySettings.Type === 'error' ? Language['error'] : (NotifySettings.Type === 'information' ? Language['information'] : (NotifySettings.Type === 'success' ? Language['successful'] : '')) }}</span>
+                        </div>
+                        <div class="w-full flex items-start justify-start">
+                            <span class="w-full text-white text-[.6771vw] font-normal font-['Poppins']">{{ NotifySettings.Message }}</span>
+                        </div>
+                    </div>
+                    <div class="w-[3.5%] h-full"></div>
+                    <div class="w-[6%] flex items-start justify-start relative">
+                        <div class="mt-[.5vw] timer" :style="{ '--duration': NotifySettings.Time, '--background-color': NotifyColor, '--size': '0.9' }">
+                            <div class="mask"></div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="w-full h-[100vh] flex items-center justify-center left-0 top-0 absolute" v-if="ShowPopupToTarget">
+            <div class="w-[35.5729vw] flex flex-col h-[9.5833vw] bg-[#000000BF] rounded-[.2604vw]" v-if="ShowPopupToTarget == 'TransferRequest'">
+                <div class="w-full h-[3.5417vw] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.775vw] absolute">{{ Language['want_to_buy_the_company'] }}</span>
+                        <div class="w-full bottom-[.6vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ Language['wtbtc_description'] }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/dashboard/dollar.png" class="w-[13.3333vw] h-[3.63vw] right-0 top-0 absolute">
+                </div>
+                <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                    <div class="w-[98%] h-[86%] flex flex-wrap top-[.3vw] absolute">
+                        <div class="w-[70.5%] h-full flex flex-col">
+                            <div class="w-full h-[58%] flex items-center justify-center bg-[#00F0FF] mb-[1%]">
+                                <span class="w-full text-black text-[.7813vw] text-center font-semibold font-['Poppins']">{{ TransferReqCompanyName }}</span>
+                            </div>
+                            <div class="w-full h-[43.5%] bg-[#000000DE] flex items-center justify-center">
+                                <span class="w-full text-[.7vw] depositwithdrawinput">${{ FormatMoney(TransferReqCompanyPrice) }}</span>
+                            </div>
+                        </div>
+                        <div class="w-[29.5%] h-full flex flex-col items-start">
+                            <div class="w-full h-[55.5%] flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="TransferReqFunction()">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ Language['accept'] }}</span>
+                            </div>
+                            <div class="w-full h-[2.5%]"></div>
+                            <div class="w-[99%] h-[42%] flex items-center justify-center bg-[#000000DE] ml-[1%] cursor-pointer" @click="CloseTransferReq()">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ Language['cancel'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-[35.5729vw] flex flex-col h-[9.5833vw] bg-[#000000BF] rounded-[.2604vw]" v-if="ShowPopupToTarget == 'JobReq'">
+                <div class="w-full h-[3.5417vw] bg-[#000000DE] rounded-t-[.2604vw] relative">
+                    <div class="w-[70%] h-full flex flex-col items-start justify-center left-[.5vw] absolute">
+                        <span class="w-full text-stone-300 text-[.8333vw] font-semibold font-['Poppins'] top-[.775vw] absolute">{{ Language['job_req'] }}</span>
+                        <div class="w-full bottom-[.6vw] absolute">
+                            <span class="text-zinc-600 text-[.6771vw] font-semibold font-['Poppins']">{{ Language['job_req_description'] }}</span>
+                        </div>
+                    </div>
+                    <img src="./img/bossmenu/employee-bg.png" class="w-[13.3333vw] h-[3.63vw] right-0 top-0 absolute">
+                </div>
+                <div class="w-full h-[61.5%] flex items-center justify-center relative">
+                    <div class="w-[98%] h-[86%] flex flex-wrap top-[.3vw] absolute">
+                        <div class="w-[70.5%] h-full flex flex-col">
+                            <div class="w-full h-[58%] flex items-center justify-center bg-[#00F0FF] mb-[1%]">
+                                <span class="w-full text-black text-[.7813vw] text-center font-semibold font-['Poppins']">{{ JobReqCompanyName }}</span>
+                            </div>
+                            <div class="w-full h-[43.5%] bg-[#000000DE] flex items-center justify-center">
+                                <span class="w-full text-[.7vw] depositwithdrawinput">${{ FormatMoney(JobReqSalary) + '/' + Language['day'] }}</span>
+                            </div>
+                        </div>
+                        <div class="w-[29.5%] h-full flex flex-col items-start">
+                            <div class="w-full h-[55.5%] flex items-center justify-center bg-[#000000DE] cursor-pointer" @click="AcceptedJobRequest()">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ Language['accept'] }}</span>
+                            </div>
+                            <div class="w-full h-[2.5%]"></div>
+                            <div class="w-[99%] h-[42%] flex items-center justify-center bg-[#000000DE] ml-[1%] cursor-pointer" @click="CloseJobReq('reject')">
+                                <span class="w-full text-white text-[.7813vw] text-center font-semibold font-['Poppins']">{{ Language['reject'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full h-full flex items-center justify-center left-0 top-0 absolute" style="background: url('./img/popup-background.png'); background-size: cover; background-repeat: no-repeat;" v-if="FeedbackPopupSettings.Show || ComplaintPopupSettings.Show">
+            <div class="w-[53.75vw] h-[25.1042vw] flex flex-col border-[.1042vw] border-[#575757] bg-[#000000] rounded-[1.1979vw]" style="background-image: url('./img/feedback-popup-background-effect.png'); background-size: cover; background-repeat: no-repeat;" v-if="FeedbackPopupSettings.Show">
+                <div class="w-full h-[8.8%]"></div>
+                <div class="w-full h-[7%] flex items-center justify-center">
+                    <span class="w-full text-zinc-400 text-[1.6667vw] text-center font-semibold font-['Poppins']">{{ Language['leave_us_a_feedback'] }}</span>
+                </div>
+                <div class="w-full h-[9%]"></div>
+                <div class="w-full h-[6.5%] flex items-center justify-center">
+                    <span class="w-full text-zinc-400 text-[1.3542vw] text-center font-medium font-['Poppins']">{{ Language['feedback_description'] }}</span>
+                </div>
+                <div class="w-full h-[5%]"></div>
+                <div class="w-full h-[10.5%] flex items-center justify-center">
+                    <svg v-for="v in 5" :key="v" class="ml-[1.7vw] cursor-pointer" :class="{ 'active-star': v <= FeedbackPopupSettings.Rating }" xmlns="http://www.w3.org/2000/svg" width="52" height="49" viewBox="0 0 52 49" fill="none" @click="FeedbackPopupSettings.Rating = v">
+                        <path d="M26 0L32.0619 18.6565H51.6785L35.8083 30.1869L41.8702 48.8435L26 37.3131L10.1298 48.8435L16.1917 30.1869L0.321474 18.6565H19.9381L26 0Z" fill="#ffffff54"/>
+                    </svg>
+                </div>
+                <div class="w-full h-[4.8%]"></div>
+                <div class="w-full h-[23%] flex items-start justify-center relative">
+                    <textarea class="w-[93%] h-full bg-[#212121] resize-none outline-none px-[.6vw] py-[.5vw] overflow-auto feedback-input absolute" :placeholder="Language['feedback_input_placeholder']" v-model="FeedbackPopupSettings.Message"></textarea>
+                    <div class="w-[93%] h-[20%] flex items-end bottom-0 absolute">
+                        <span class="w-full text-[#B1B1B1] text-[.7292vw] font-medium font-['Poppins'] left-0 top-0 ml-[.6vw] absolute" :class="{ 'text-red': FeedbackPopupSettings.Message.length > FeedbackCharacters.MaximumCharacter }">{{ Language['words'] + ': ' + FeedbackPopupSettings.Message.length }}</span>
+                    </div>
+                </div>
+                <div class="w-full h-[4.8%]"></div>
+                <div class="w-full h-[15.5%] flex items-center justify-center">
+                    <div class="w-[13.2292vw] h-[2.7208vw] flex items-center justify-center opacity-[.85] bg-[#4D4D4D] rounded-[.3125vw] mr-[2vw] mb-[.4vw] cursor-pointer hover:opacity-[1]" @click="CloseComplaintAndFeedback()">
+                        <span class="w-full text-center text-[#B1B1B1] text-[1.3542vw] font-medium font-['Poppins']">{{ Language['close'].toUpperCase() }}</span>
+                    </div>
+                    <div class="w-[13.2292vw] h-[2.7208vw] flex items-center justify-center opacity-[.85] bg-[#00F0FF] rounded-[.3125vw] ml-[2vw] mb-[.4vw] cursor-pointer hover:opacity-[1]" style="box-shadow: 0vw 0vw .5vw 0vw #00F0FF;" @click="SendFeedback()">
+                        <div class="w-full text-center text-black text-[1.3542vw] font-medium font-['Poppins']">{{ Language['confirm'].toUpperCase() }}</div>
+                    </div>
+                </div>
+                <div class="w-full h-[5.1%]"></div>
+            </div>
+            <div class="w-[50.2vw] h-[36.5vw] flex absolute" v-if="ComplaintPopupSettings.Show">
+                <div class="w-[39.8438vw] h-[32.9167vw] flex flex-col border-[.1042vw] border-[#575757] bg-[#000000] rounded-[.5208vw] left-[5.15vw] top-[1.7vw] absolute" style="background-image: url('./img/complaint-background-effect.png'); background-size: cover; background-repeat: no-repeat;">
+                    <div class="w-full h-[6%]"></div>
+                    <div class="w-full h-[6%] flex items-center justify-center">
+                        <span class="w-full text-zinc-400 text-[1.6667vw] text-center font-semibold font-['Poppins']">{{ Language['complaint_header'] }}</span>
+                    </div>
+                    <div class="w-full h-[5.6%]"></div>
+                    <div class="w-full h-[5.4%] flex items-center justify-center">
+                        <span class="w-full text-zinc-400 text-[1.3542vw] text-center font-medium font-['Poppins']">{{ Language['complaint_description'] }}</span>
+                    </div>
+                    <div class="w-full h-[7%]"></div>
+                    <div class="w-full h-[44%] flex items-center justify-center">
+                        <div class="w-[88%] h-full relative">
+                            <textarea class="w-full h-full bg-[#212121] resize-none outline-none px-[.6vw] py-[.5vw] overflow-auto feedback-input absolute" :placeholder="Language['complaint_input_placeholder']" v-model="ComplaintPopupSettings.Message"></textarea>
+                            <div class="w-[93%] h-[10%] flex items-end bottom-0 absolute">
+                                <span class="w-full text-[#B1B1B1] text-[.7292vw] font-medium font-['Poppins'] left-0 top-0 ml-[.6vw] absolute" :class="{ 'text-red': ComplaintPopupSettings.Message.length > ComplaintCharacters.MaximumCharacter }">{{ Language['words'] + ': ' + ComplaintPopupSettings.Message.length }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-[5%]"></div>
+                    <div class="w-full h-[13%] flex items-center justify-center">
+                        <div class="w-[13.2292vw] h-[2.7208vw] flex items-center justify-center opacity-[.8] bg-[#4D4D4D] rounded-[.3125vw] mr-[1.5vw] mb-[.4vw] cursor-pointer hover:opacity-[1]" @click="CloseComplaintAndFeedback()">
+                            <span class="w-full text-center text-[#B1B1B1] text-[1.3542vw] font-medium font-['Poppins']">{{ Language['close'].toUpperCase() }}</span>
+                        </div>
+                        <div class="w-[13.2292vw] h-[2.7208vw] flex items-center justify-center opacity-[.8] bg-[#FF0004] rounded-[.3125vw] ml-[1.5vw] mb-[.4vw] cursor-pointer hover:opacity-[1]" style="box-shadow: 0vw 0vw .6vw 0vw #FF0004;" @click="SendComplaint()">
+                            <div class="w-full text-center text-black text-[1.3542vw] font-medium font-['Poppins']">{{ Language['confirm'].toUpperCase() }}</div>
+                        </div>
+                    </div>
+                    <div class="w-full h-[8%]"></div>
+                </div>
+                <img src="./img/complaint-img.png" class="w-[12.7083vw] h-[9.9159vw] right-0 bottom-0 absolute">
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.min.js" type="text/javascript"></script>
+</body>
+</html>

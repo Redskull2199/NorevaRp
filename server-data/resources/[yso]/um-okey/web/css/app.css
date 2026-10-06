@@ -1,0 +1,262 @@
+@import url("./skew/slots.css");
+
+:root {
+  --color-primary: #ffd67b;
+  --color-secondary: #ffb347;
+  --color-warning: #fbbf24;
+  --color-text: #ffffff;
+  --color-text-muted: #b0b0b0;
+  --color-dark: #1a1a1a;
+  --button-background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  --overlay-background: rgb(0 0 0 / 32%);
+  --shadow-default: 0 2vh 6vh rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 0.4vh 1.2vh rgb(230 134 34 / 30%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: none;
+  visibility: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+
+/* Oyun Başlat Menüsü */
+.start-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--overlay-background);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.start-menu-overlay.active {
+  display: flex;
+}
+
+.start-menu {
+  background: var(--button-background);
+  border-radius: 2vh;
+  padding: 3rem;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-default);
+  border: 0.1vh solid rgba(255, 255, 255, 0.1);
+}
+
+.start-menu-title {
+  color: var(--color-primary);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2vh;
+}
+
+.start-menu-description {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.start-game-btn {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: var(--color-dark);
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 5vh;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2vh;
+  text-transform: uppercase;
+  letter-spacing: 0.1vh;
+  box-shadow: 0 0.4vh 2vh rgba(255, 214, 123, 0.4);
+}
+
+.start-game-btn:hover {
+  transform: translateY(-0.3vh);
+  box-shadow: 0 0.6vh 3vh rgba(255, 214, 123, 0.6);
+  background: linear-gradient(135deg, #ffdb8a 0%, #ffc05c 100%);
+}
+
+.start-game-btn:active {
+  transform: translateY(0);
+}
+
+.outer-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fixed-ratio-container {
+  width: 45vw;
+  aspect-ratio: 16 / 5;
+  position: absolute;
+  transform: rotate(0deg);
+  bottom: 13.7vh;
+}
+
+.istaka {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vw;
+  padding: 1vh;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+}
+
+.bottom-row {
+  grid-template-columns: repeat(13, 1.2fr);
+  width: 47vw;
+  margin-left: -2.5vh;
+  margin-top: 0.8vh;
+}
+
+.slot {
+  aspect-ratio: 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(1.5vh) translateZ(0vh) rotate(10deg);
+  cursor: pointer;
+}
+
+.slot[disabled],
+.tile-slot[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+
+button {
+  color: var(--color-text);
+  pointer-events: auto;
+  padding: 1.2vh 2.4vh;
+  border-radius: 0.8vh;
+  font-size: 1.5vh;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8vh;
+  font-family: inherit;
+  font-weight: 500;
+  outline: none;
+  box-shadow: var(--shadow-default);
+  border: 0.1vh solid rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+  background: #1a1a1a70;
+}
+
+button:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: var(--shadow-hover);
+}
+
+
+.give-throw {
+  position: absolute;
+  bottom: 18vh;
+  left: 11vh;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5vh;
+}
+
+.throw-force-right {
+  position: absolute;
+  right: 25vh;
+  bottom: 1vh;
+}
+
+.center-table {
+  position: absolute;
+  top: 18vh;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 5vh;
+}
+
+.finish-container {
+  position: absolute;
+  bottom: 39vh;
+  right: 44vh;
+  transform: translateX(-50%);
+}
+
+#finish-hand:active {
+  transform: translateY(0);
+}
+
+.turn-indicator {
+  position: fixed;
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #6464644d;
+  color: var(--color-text);
+  padding: 1.5vh 3vh;
+  border-radius: 1vh;
+  font-size: 1rem;
+  font-weight: 500;
+  z-index: 1000;
+  text-transform: uppercase;
+}
+
+.your-turn {
+  color: var(--color-primary);
+  animation: pulse 1.5s infinite;
+  display: flex;
+  align-items: center;
+}
+
+.waiting {
+  color: var(--color-warning);
+  display: flex;
+  align-items: center;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.mr4 {
+  margin-right: 0.4vh;
+}

@@ -1,0 +1,1 @@
+import{S as e}from"./index-B9-rBG8g.js";function t(e){return e?e.name||e.username:null}async function n(t){let{switchedTo:n}=await e(t);return n}export{t as n,n as t};
